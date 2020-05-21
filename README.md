@@ -1,4 +1,4 @@
-# test-vue-app
+# love-li-ever-after
 
 ## Project setup
 ```
@@ -13,6 +13,11 @@ npm run serve
 ### Compiles and minifies for production
 ```
 npm run build
+```
+
+### Run after building
+```
+npm run start
 ```
 
 ### Lints and fixes files
