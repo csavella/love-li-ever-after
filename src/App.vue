@@ -1,60 +1,24 @@
 <template>
   <div id="app">
-    <router-link class="rlink" to="/main">Main</router-link>
-    <router-link class="rlink" to="/populous">Populous</router-link>
-    <router-link class="rlink" to="/regions">Regions</router-link>
-    <router-link class="rlink" to="/allinfo">All Info</router-link>
-    <router-view :allinfo="countries" :twentymilpop="pop" :regioncount="regcountries"></router-view>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-items">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbar-items">
+          <ul class="navbar-nav mx-auto">
+            <li><router-link class="navlink" to="/main">Home</router-link></li>
+            <li><router-link class="navlink" to="/ourstory">Our Story</router-link></li>
+            <li><router-link class="navlink" to="/details">Details</router-link></li>
+            <li><router-link class="navlink" to="/weddingparty">Wedding Party</router-link></li>
+            <li><router-link class="navlink" to="/rsvp">RSVP</router-link></li>
+          </ul>
+        </div>
+    </nav>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-
-export default {
-  name: 'App',
-  data() {
-    return {
-      pop: [],
-      countries: [],
-      regcountries: []
-    }
-  },
-  mounted() {
-    axios
-      .get("https://restcountries.eu/rest/v2/all")
-      .then(response => {
-          this.countries = response.data;
-          this.popOverTwentyMil();
-          this.numCountriesInRegion();
-      })
-      .catch(error => {
-          console.log('Request failed', error);
-      });
-  },
-  methods: {
-    popOverTwentyMil() {
-      this.countries.forEach((country) => {
-        if (country.population > 20000000) this.pop.push(country);
-      });
-    },
-    numCountriesInRegion() {
-      this.countries.forEach((country) => {
-        var index = this.regcountries.findIndex(p => p.name == country.region);
-
-        if (index < 0) {
-          this.regcountries.push({
-            name: country.region,
-            count: 1
-          });
-        }
-        else {
-          this.regcountries[index].count++;
-        }
-      })
-    }
-  }
-}
 </script>
 
 <style>
@@ -64,25 +28,29 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
+/*navigation bar*/
 li {
-  display: inline-block;
-  margin: 0 10px;
+    display: inline-flex;
+    padding: 5px 30px 5px 30px;
+    vertical-align: middle;
+} 
+
+.navlink {
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: bolder;
+    color: #8e3155;
 }
 
-.rlink {
-  display: inline-block;
-  margin: 0 10px;
-  font-size: 2em;
+.navlink:hover, .navlink:focus, .navlink:active {
+    color: #4e6173;
+    text-decoration: none;
 }
+
 body {
-  background-color: #cce5ff;
+  background-color: #c6dbf1;
 }
+
 </style>

@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import details from '@/components/details'
 import main from '@/components/main'
-import populous from '@/components/populous'
-import regions from '@/components/regions'
-import allinfo from '@/components/allinfo'
+import ourstory from '@/components/ourstory'
+import rsvp from '@/components/rsvp'
+import weddingparty from '@/components/weddingparty'
 
 Vue.use(Router)
 
@@ -15,19 +16,24 @@ export default new Router({
       component: main
     },
     {
-        path: '/populous',
-        name: 'populous',
-        component: populous
+        path: '/details',
+        name: 'details',
+        component: details
     },
     {
-        path: '/regions',
-        name: 'regions',
-        component: regions
+        path: '/ourstory',
+        name: 'ourstory',
+        component: ourstory
     },
     {
-        path: '/allinfo',
-        name: 'allinfo',
-        component: allinfo
+        path: '/rsvp',
+        name: 'rsvp',
+        component: rsvp
+    },
+    {
+      path: '/weddingparty',
+      name: 'weddingparty',
+      component: weddingparty
     }
   ]
 })
