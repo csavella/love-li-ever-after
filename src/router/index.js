@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import details from '@/components/details'
 import main from '@/components/main'
 import ourstory from '@/components/ourstory'
+import planning from '@/components/planning'
 import rsvp from '@/components/rsvp'
 import weddingparty from '@/components/weddingparty'
 
@@ -11,7 +12,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/main',
+      path: '/',
       name: 'main',
       component: main
     },
@@ -34,6 +35,11 @@ export default new Router({
       path: '/weddingparty',
       name: 'weddingparty',
       component: weddingparty
+    },
+    {
+      path: '/planning',
+      name: 'planning',
+      component: planning
     }
   ]
 })

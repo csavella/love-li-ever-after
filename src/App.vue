@@ -6,9 +6,10 @@
         </button>
         <div class="navbar-collapse collapse" id="navbar-items">
           <ul class="navbar-nav mx-auto">
-            <li><router-link class="navlink" to="/main">Home</router-link></li>
+            <li><router-link class="navlink" to="/">Home</router-link></li>
             <li><router-link class="navlink" to="/ourstory">Our Story</router-link></li>
             <li><router-link class="navlink" to="/details">Details</router-link></li>
+            <li><router-link class="navlink" to="/planning">Planning</router-link></li>
             <li><router-link class="navlink" to="/weddingparty">Wedding Party</router-link></li>
             <li><router-link class="navlink" to="/rsvp">RSVP</router-link></li>
           </ul>
