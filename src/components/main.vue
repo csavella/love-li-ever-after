@@ -1,17 +1,20 @@
 <template>
-  <div>
-  <section class="flex-container timer">
-      <div class="flex-item number">{{ time[0].time }}</div>
-      <div class="flex-item number">{{ time[1].time }}</div>
-      <div class="flex-item number">{{ time[2].time }}</div>
-      <div class="flex-item number">{{ time[3].time }}</div>
-  </section>
-  <section class="flex-container labels">
-      <div class="flex-item label">Days</div>
-      <div class="flex-item label">Hours</div>
-      <div class="flex-item label">Minutes</div>
-      <div class="flex-item label">Seconds</div>
-  </section>
+  <div class="container">
+    <h1>Kevin &amp; Chastity</h1>
+    <h3>Septemper 18, 2021 in Lahaina, HI</h3>
+    <section class="flex-container timer">
+        <div class="flex-item number">{{ time[0].time }}</div>
+        <div class="flex-item number">{{ time[1].time }}</div>
+        <div class="flex-item number">{{ time[2].time }}</div>
+        <div class="flex-item number">{{ time[3].time }}</div>
+    </section>
+    <section class="flex-container labels">
+        <div class="flex-item label">Days</div>
+        <div class="flex-item label">Hours</div>
+        <div class="flex-item label">Minutes</div>
+        <div class="flex-item label">Seconds</div>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -24,6 +27,20 @@ export default {
 </script>
 
 <style>
+
+.container {
+    background-color: #4e6173;
+    opacity: 0.7;
+    color: white;
+}
+h1 {
+    font-size: 5em;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+h3 {
+    padding: 30px;
+}
 .flex-container {
   display: flex;
   flex-direction: row;
@@ -36,21 +53,14 @@ export default {
   height: 50px;
   margin: 5px;
 }
-.timer {
-    color: white;
-}
 .label {
-    color: #4e6173;
     font-size: 1.3em;
 }
 .number {
     background-color: #4e6173;
     box-sizing: border-box;
     border-radius: 5px;
-    color: white;
     font-size: 2em;
     text-align: center;
-    opacity: 0.8;
 }
-
 </style>

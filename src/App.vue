@@ -1,22 +1,22 @@
 <template>
-  <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-items">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse" id="navbar-items">
-          <ul class="navbar-nav mx-auto">
-            <li><router-link class="navlink" to="/">Home</router-link></li>
-            <li><router-link class="navlink" to="/ourstory">Our Story</router-link></li>
-            <li><router-link class="navlink" to="/details">Details</router-link></li>
-            <li><router-link class="navlink" to="/planning">Planning</router-link></li>
-            <li><router-link class="navlink" to="/weddingparty">Wedding Party</router-link></li>
-            <li><router-link class="navlink" to="/rsvp">RSVP</router-link></li>
-          </ul>
-        </div>
-    </nav>
-    <router-view :time="times"></router-view>
-</div>
+    <div id="app">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-items">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="navbar-collapse collapse" id="navbar-items">
+            <ul class="navbar-nav mx-auto">
+              <li><router-link class="navlink" to="/">Home</router-link></li>
+              <li><router-link class="navlink" to="/ourstory">Our Story</router-link></li>
+              <li><router-link class="navlink" to="/details">Details</router-link></li>
+              <li><router-link class="navlink" to="/planning">Planning</router-link></li>
+              <li><router-link class="navlink" to="/weddingparty">Wedding Party</router-link></li>
+              <li><router-link class="navlink" to="/rsvp">RSVP</router-link></li>
+            </ul>
+          </div>
+      </nav>
+      <router-view :time="times"></router-view>
+  </div>
 </template>
 
 <script>
@@ -82,6 +82,8 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css?family=Great%20Vibes");
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -90,7 +92,23 @@ export default {
   color: #2c3e50;
 }
 
+body {
+  background-image: url("assets/venue1.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #c6dbf1;
+}
+
+h1 {
+  font-family: 'Great Vibes', Avenir, Helvetica, Arial, sans-serif;
+}
+
 /*navigation bar*/
+.navbar {
+  opacity: 0.9;
+}
 li {
     display: inline-flex;
     padding: 5px 30px 5px 30px;
@@ -107,10 +125,6 @@ li {
 .navlink:hover, .navlink:focus, .navlink:active {
     color: #4e6173;
     text-decoration: none;
-}
-
-body {
-  background-color: #c6dbf1;
 }
 
 </style>
