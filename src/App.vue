@@ -113,12 +113,4 @@ body {
   background-color: #c6dbf1;
 }
 
-.card-title{
-  padding: 1em;
-}
-.card {
-  padding-bottom: ;
-  margin-bottom: 2em;
-}
-
 </style>
