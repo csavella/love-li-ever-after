@@ -26,6 +26,7 @@ export default {
 <style>
 .details {
     padding: 20px;
+    opacity: 0.7;
 }
 .ceremony{
     padding: 50px;
