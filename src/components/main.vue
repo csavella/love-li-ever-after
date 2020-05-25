@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container main">
     <h1>Kevin &amp; Chastity</h1>
-    <h3>Septemper 18, 2021 in Lahaina, HI</h3>
+    <h3>September 18, 2021 in Lahaina, HI</h3>
     <section class="flex-container timer">
         <div class="flex-item number">{{ time[0].time }}</div>
         <div class="flex-item number">{{ time[1].time }}</div>
@@ -30,8 +30,10 @@ export default {
 
 .container {
     background-color: #4e6173;
-    opacity: 0.7;
     color: white;
+}
+.main {
+  opacity: 0.7;
 }
 h1 {
     font-size: 5em;
