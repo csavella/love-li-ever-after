@@ -90,26 +90,28 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height: 100vh;
 }
 
-body {
+.main, .details, .rsvp {
   background-image: url("assets/venue1.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
   background-color: #c6dbf1;
+  width: 100vw;
+  height: 100vh;
 }
 
-h1 {
+.container {
+  opacity: 0.7;
+}
+
+h1, .bmlink, .gmlink {
   font-family: 'Great Vibes', Avenir, Helvetica, Arial, sans-serif;
 }
 
 /*navigation bar*/
-.navbar {
-  opacity: 0.9;
-}
 li {
     display: inline-flex;
     padding: 5px 30px 5px 30px;
@@ -126,6 +128,22 @@ li {
 .navlink:hover, .navlink:focus, .navlink:active {
     color: #4e6173;
     text-decoration: none;
+}
+
+.gcard:hover {
+  background-image: url("assets/marbles.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+
+.bcard:hover {
+  background-image: url("assets/flowers.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
 }
 
 </style>

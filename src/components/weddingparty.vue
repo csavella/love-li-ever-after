@@ -1,6 +1,261 @@
 <template>
-<div id="app">
-    Hello! You're viewing our wedding party!
-</div>
+    <div class="party">
+        <!--<div class="smooth-scroll partyintro d-flex flex-row justify-content-center">-->
+        <div class="smooth-scroll partyintro gmcards row row-cols-2">
+            <div class="col mb-4 groomsmen">
+                <div class="card partycards gcard">
+                    <div class="card-img-top" src="" alt="card image cap">
+                        <a class="gmlink" href="#groomsmen">Groomsmen</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-4 bridesmaids">
+                <div class="card partycards bcard">
+                    <div class="card-img-top" src="" alt="card image cap">
+                        <a class="bmlink" href="#bridesmaids">Bridesmaids</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section id="groomsmen">
+            <div class="gmcards row row-cols-1 row-cols-md-2 row-cols-lg-3">
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="view overlay">
+                            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
+                            <a href="#!">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">Jay Feng</h4>
+                            <p class="card-text">Best Man</p>
+                        </div>
+                    </div>      
+                </div>
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="view overlay">
+                            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
+                            <a href="#!">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">Tim Maw</h4>
+                            <p class="card-text">Best Man</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="view overlay">
+                            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
+                            <a href="#!">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">Timmy Nguyen</h4>
+                            <p class="card-text">Groomsman</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="view overlay">
+                            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
+                            <a href="#!">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">Thomas Nguyen</h4>
+                            <p class="card-text">Groomsman</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="view overlay">
+                            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
+                            <a href="#!">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">Richard Li</h4>
+                            <p class="card-text">Groomsman</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="view overlay">
+                            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
+                            <a href="#!">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">Allen Kim</h4>
+                            <p class="card-text">Groomsman</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!--</section>
+        <section id="bridesmaids">-->
+            <div id="bridesmaids" class="gmcards row row-cols-1 row-cols-md-2 row-cols-lg-3">
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="view overlay">
+                            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
+                            <a href="#!">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">Jasmine Savella</h4>
+                            <p class="card-text">Maid of Honor</p>
+                        </div>
+                    </div>      
+                </div>
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="view overlay">
+                            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
+                            <a href="#!">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">Alina Luong</h4>
+                            <p class="card-text">Bridesmaid</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="view overlay">
+                            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
+                            <a href="#!">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">Kristie Maw</h4>
+                            <p class="card-text">Bridesmaid</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="view overlay">
+                            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
+                            <a href="#!">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">Connie Owens</h4>
+                            <p class="card-text">Bridesmaid</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="view overlay">
+                            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
+                            <a href="#!">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">Rachel Cobleigh</h4>
+                            <p class="card-text">Bridesmaid</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="view overlay">
+                            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg" alt="Card image cap">
+                            <a href="#!">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">Megan Kelley</h4>
+                            <p class="card-text">Bridesmaid</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 </template>
 
+<style>
+.bmlink, .gmlink {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.gmlink:hover {
+    color: black;
+}
+.bmlink:hover {
+    color: white;
+}
+.party {
+    width: 80vw;
+    margin: auto;
+    padding: 10px;
+}
+.partyintro {
+    width: 100%;
+    height: 90vh;
+    margin: auto;
+    padding: 10px;
+}
+.gcard {
+    background-color: lightblue;
+}
+.bcard {
+    background-color: maroon;
+}
+.groomsmen {
+    font-size: 3em;
+    width:50vw;
+    height: 100%;
+}
+.bridesmaids {
+    font-size: 3em;
+    width:50vw;
+    height: 100%;
+}
+#groomsmen {
+    width: 90%;
+    height: 100vh;
+    padding: 10px;
+    margin: auto;
+}
+.bmlink {
+    color: white;
+}
+.gmlink {
+    color: black;
+}
+.pic {
+    width: 50vw;
+}
+.partycards {
+    height: 100%;
+}
+</style>
