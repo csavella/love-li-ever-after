@@ -1,19 +1,21 @@
 <template>
-  <div class="container main">
-    <h1>Kevin &amp; Chastity</h1>
-    <h3>September 18, 2021 in Lahaina, HI</h3>
-    <section class="flex-container timer">
-        <div class="flex-item number">{{ time[0].time }}</div>
-        <div class="flex-item number">{{ time[1].time }}</div>
-        <div class="flex-item number">{{ time[2].time }}</div>
-        <div class="flex-item number">{{ time[3].time }}</div>
-    </section>
-    <section class="flex-container labels">
-        <div class="flex-item label">Days</div>
-        <div class="flex-item label">Hours</div>
-        <div class="flex-item label">Minutes</div>
-        <div class="flex-item label">Seconds</div>
-    </section>
+  <div class="main">
+    <div class="container">
+      <h1>Kevin &amp; Chastity</h1>
+      <h3>September 18, 2021 in Lahaina, HI</h3>
+      <section class="flex-container timer">
+          <div class="flex-item number">{{ time[0].time }}</div>
+          <div class="flex-item number">{{ time[1].time }}</div>
+          <div class="flex-item number">{{ time[2].time }}</div>
+          <div class="flex-item number">{{ time[3].time }}</div>
+      </section>
+      <section class="flex-container labels">
+          <div class="flex-item label">Days</div>
+          <div class="flex-item label">Hours</div>
+          <div class="flex-item label">Minutes</div>
+          <div class="flex-item label">Seconds</div>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -31,9 +33,6 @@ export default {
 .container {
     background-color: #4e6173;
     color: white;
-}
-.main {
-  opacity: 0.7;
 }
 h1 {
     font-size: 5em;

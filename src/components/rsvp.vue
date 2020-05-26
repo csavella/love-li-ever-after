@@ -1,6 +1,6 @@
 <template>
-<div id="app">
-    Hello! You're viewing our RSVPs!
+<div class="rsvp">
+    <div class="container">Hello! RSVP form coming soon!</div>
 </div>
 </template>
 
