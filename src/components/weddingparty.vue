@@ -3,14 +3,14 @@
         <!--<div class="smooth-scroll partyintro d-flex flex-row justify-content-center">-->
         <div class="smooth-scroll partyintro gmcards row row-cols-2">
             <div class="col mb-4 groomsmen">
-                <div class="card partycards gcard">
+                <div class="card gcard">
                     <div class="card-img-top" src="" alt="card image cap">
                         <a class="gmlink" href="#groomsmen">Groomsmen</a>
                     </div>
                 </div>
             </div>
             <div class="col mb-4 bridesmaids">
-                <div class="card partycards bcard">
+                <div class="card bcard">
                     <div class="card-img-top" src="" alt="card image cap">
                         <a class="bmlink" href="#bridesmaids">Bridesmaids</a>
                     </div>
@@ -197,6 +197,13 @@
 </template>
 
 <style>
+/* wedding party intro links */
+.bmlink, .bmlink:hover {
+    color: white;
+}
+.gmlink, .gmlink:hover {
+    color: black;
+}
 .bmlink, .gmlink {
   position: absolute;
   top: 50%;
@@ -207,55 +214,61 @@
   width: 100%;
 }
 
-.gmlink:hover {
-    color: black;
-}
-.bmlink:hover {
-    color: white;
-}
-.party {
-    width: 80vw;
-    margin: auto;
-    padding: 10px;
-}
+/* wedding party intro container */
 .partyintro {
     width: 100%;
     height: 90vh;
     margin: auto;
     padding: 10px;
 }
+
+/*wedding party individual cards*/
 .gcard {
     background-color: lightblue;
 }
 .bcard {
     background-color: maroon;
 }
-.groomsmen {
+.groomsmen, .bridesmaids {
     font-size: 3em;
     width:50vw;
     height: 100%;
 }
-.bridesmaids {
-    font-size: 3em;
-    width:50vw;
+.gcard, .bcard {
     height: 100%;
 }
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 1s;
+  border-radius: 5px;
+}
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+img {
+  border-radius: 5px 5px 0 0;
+}
+
+/*section for individual cards*/
 #groomsmen {
     width: 90%;
     height: 100vh;
     padding: 10px;
     margin: auto;
 }
-.bmlink {
-    color: white;
+
+/*container for party*/
+.party {
+    width: 80vw;
+    margin: auto;
+    padding: 10px;
 }
-.gmlink {
-    color: black;
+
+/*media queries*/
+@media (max-width:600px) {
+  .party {
+      width: 100vw;
+  }
 }
-.pic {
-    width: 50vw;
-}
-.partycards {
-    height: 100%;
-}
+
 </style>
