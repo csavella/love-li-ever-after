@@ -1,15 +1,15 @@
 <template>
     <div class="party">
         <!--<div class="smooth-scroll partyintro d-flex flex-row justify-content-center">-->
-        <div class="smooth-scroll partyintro gmcards row row-cols-2">
-            <div class="col mb-4 groomsmen">
+        <div class="smooth-scroll partyintro gmcards row">
+            <div class="col-sm mb-4 groomsmen">
                 <div class="card gcard">
                     <div class="card-img-top" src="" alt="card image cap">
                         <a class="gmlink" href="#groomsmen">Groomsmen</a>
                     </div>
                 </div>
             </div>
-            <div class="col mb-4 bridesmaids">
+            <div class="col-sm mb-4 bridesmaids">
                 <div class="card bcard">
                     <div class="card-img-top" src="" alt="card image cap">
                         <a class="bmlink" href="#bridesmaids">Bridesmaids</a>
@@ -269,6 +269,13 @@ img {
   .party {
       width: 100vw;
   }
+}
+
+@media (max-width:576px) {
+    .groomsmen, .bridesmaids {
+        height:45%;
+        width: 100%;
+    }
 }
 
 </style>
