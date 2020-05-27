@@ -2,7 +2,6 @@
 <div class="rsvp">
     <div class="row rsvpform">
         <div class="col">
-            <!--<div class="col-md-6 offset-md-3 my-5">-->
             <div class="col-md-auto">
                 <h2 class="formtitle">RSVP Form</h2>
                 <div class="form-group fname">
@@ -48,7 +47,7 @@
                         <label class="form-check-label" for="glutenFree">Gluten-Free</label>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-dark rsvpsubmit" v-on:click="addGuest(); alertSent();">Submit</button>
+                <button type="submit" class="btn btn-dark rsvpsubmit" v-on:click="sendEmail(); addGuest(); alertSent();">Submit</button>
                 <!--used for debugging, output user input to table
                     <table class="table  table-striped mt-5">
                     <thead class="thead-dark">
@@ -76,6 +75,8 @@
 </template>
 
 <script>
+import emailjs from 'emailjs-com';
+
 export default {
     name: 'rsvp',
     data() {
@@ -98,6 +99,23 @@ export default {
             this.email = ''
             this.confirmed = false
             this.allergies = []
+        },
+        sendEmail: function() {
+            let templateParams = {
+                to_name: 'Chasity Savella',
+                from_name: 'love-li-ever-after',
+                first: this.firstname,
+                last: this.lastname,
+                email: this.email,
+                confirmed: this.confirmed,
+                allergies: this.allergies
+            };
+            emailjs.send('csgmail', 'template_466eiSBZ', templateParams, 'user_7mBuykiL1mjdR966UDCWz')
+            .then((result) => {
+                console.log('SUCCESS!', result.status, result.text);
+            }, (error) => {
+                console.log('FAILED...', error);
+            });
         },
         alertSent: function () {
             alert("Thank you! Your response has been recorded! XOXO, Kevin and Chas");
