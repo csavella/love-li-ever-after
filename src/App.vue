@@ -6,12 +6,12 @@
           </button>
           <div class="navbar-collapse collapse" id="navbar-items">
             <ul class="navbar-nav mx-auto">
-              <li><router-link class="navlink" to="/">Home</router-link></li>
-              <li><router-link class="navlink" to="/ourstory">Our Story</router-link></li>
-              <li><router-link class="navlink" to="/details">Details</router-link></li>
-              <li><router-link class="navlink" to="/planning">Planning</router-link></li>
-              <li><router-link class="navlink" to="/weddingparty">Wedding Party</router-link></li>
-              <li><router-link class="navlink" to="/rsvp">RSVP</router-link></li>
+              <li><router-link class="navlink" to="/" data-toggle="collapse" data-target=".navbar-collapse.show">Home</router-link></li>
+              <li><router-link class="navlink" to="/ourstory" data-toggle="collapse" data-target=".navbar-collapse.show">Our Story</router-link></li>
+              <li><router-link class="navlink" to="/details" data-toggle="collapse" data-target=".navbar-collapse.show">Details</router-link></li>
+              <li><router-link class="navlink" to="/planning" data-toggle="collapse" data-target=".navbar-collapse.show">Planning</router-link></li>
+              <li><router-link class="navlink" to="/weddingparty" data-toggle="collapse" data-target=".navbar-collapse.show">Wedding Party</router-link></li>
+              <li><router-link class="navlink" to="/rsvp" data-toggle="collapse" data-target=".navbar-collapse.show">RSVP</router-link></li>
             </ul>
           </div>
       </nav>
