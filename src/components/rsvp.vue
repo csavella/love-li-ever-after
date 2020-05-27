@@ -93,16 +93,7 @@ export default {
     },
     methods: {
         addGuest: function () {
-            if(!this.firstname) {
-                alert("First name is required");
-            }
-            else if(!this.lastname) {
-                alert("Last name is required");
-            }
-            else if(!this.email) {
-                alert("Email is required");
-            }
-            else if(this.firstname && this.lastname && this.email) {
+            if(this.firstname && this.lastname && this.checkEmailAddress()) {
                 this.sendEmail();
                 alert("Thank you! Your response has been recorded! XOXO, Kevin and Chas");
                 console.log(`Adding guest ${this.firstname} ${this.lastname} ${this.email} ${this.confirmed} ${this.allergies}`);
@@ -131,6 +122,14 @@ export default {
             }, (error) => {
                 console.log('FAILED...', error);
             });
+        },
+        checkEmailAddress: function() {
+            var email_regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+            if(this.email.match(email_regex)) {
+                return true;
+            }
+            alert("Error: please enter a valid email address")
+            return false;
         }
     }
 }
