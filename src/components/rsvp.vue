@@ -3,23 +3,24 @@
     <div class="row rsvpform">
         <div class="col">
             <div class="col-md-auto">
+            <form>
                 <h2 class="formtitle">RSVP Form</h2>
                 <div class="form-group fname">
                     <label for="firstname">First name</label>
-                    <input id="firstname" name="firstname" class="form-control" v-model="firstname"/>
+                    <input id="firstname" name="firstname" class="form-control" required v-model="firstname"/>
                 </div>
                 <div class="form-group lname">
                     <label for="lastname">Last name</label>
-                    <input id="lastname" name="lastname" class="form-control" v-model="lastname"/>
+                    <input id="lastname" name="lastname" class="form-control" required v-model="lastname"/>
                 </div>
                 <div class="form-group emailaddress">
                     <label for="emailaddress">Email address</label>
-                    <input type="email" class="form-control" id="emailaddress" name="emailaddress" aria-describedby="emailHelp" v-model="email">
+                    <input type="email" class="form-control" id="emailaddress" name="emailaddress" required aria-describedby="emailHelp" v-model="email">
                 </div>
                 <div class="form-group">
                     <label class="response">Response:</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="optradio" id="accept" value="true" v-model="confirmed">
+                        <input class="form-check-input" type="radio" name="optradio" id="accept" value="true" required v-model="confirmed">
                         <label class="form-check-label" for="accept">Delightfully accepts</label>
                     </div>
                     <div class="form-check">
@@ -47,7 +48,7 @@
                         <label class="form-check-label" for="glutenFree">Gluten-Free</label>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-dark rsvpsubmit" v-on:click="sendEmail(); addGuest(); alertSent();">Submit</button>
+                <button type="submit" class="btn btn-dark rsvpsubmit" v-on:click="addGuest">Submit</button>
                 <!--used for debugging, output user input to table
                     <table class="table  table-striped mt-5">
                     <thead class="thead-dark">
@@ -68,6 +69,7 @@
                     </tbody>
                 </table>
                 -->
+            </form>
             </div>
         </div>
     </div>
@@ -75,7 +77,7 @@
 </template>
 
 <script>
-import emailjs from 'emailjs-com';
+/*import emailjs from 'emailjs-com';*/
 
 export default {
     name: 'rsvp',
@@ -91,14 +93,27 @@ export default {
     },
     methods: {
         addGuest: function () {
-            console.log(`Adding guest ${this.firstname} ${this.lastname} ${this.email} ${this.confirmed} ${this.allergies}`)
-            let guest = {firstname: this.firstname, lastname: this.lastname, email: this.email, confirmed: this.confirmed, allergies: this.allergies}
-            this.guests.push(guest)
-            this.firstname = ''
-            this.lastname = ''
-            this.email = ''
-            this.confirmed = false
-            this.allergies = []
+            if(!this.firstname) {
+                alert("First name is required");
+            }
+            else if(!this.lastname) {
+                alert("Last name is required");
+            }
+            else if(!this.email) {
+                alert("Email is required");
+            }
+            else if(this.firstname && this.lastname && this.email) {
+                this.sendEmail();
+                alert("Thank you! Your response has been recorded! XOXO, Kevin and Chas");
+                console.log(`Adding guest ${this.firstname} ${this.lastname} ${this.email} ${this.confirmed} ${this.allergies}`);
+                let guest = {firstname: this.firstname, lastname: this.lastname, email: this.email, confirmed: this.confirmed, allergies: this.allergies}
+                this.guests.push(guest)
+                this.firstname = ''
+                this.lastname = ''
+                this.email = ''
+                this.confirmed = false
+                this.allergies = []
+            }
         },
         sendEmail: function() {
             let templateParams = {
@@ -116,9 +131,6 @@ export default {
             }, (error) => {
                 console.log('FAILED...', error);
             });
-        },
-        alertSent: function () {
-            alert("Thank you! Your response has been recorded! XOXO, Kevin and Chas");
         }
     }
 }
