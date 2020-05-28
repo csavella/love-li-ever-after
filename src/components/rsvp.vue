@@ -1,21 +1,21 @@
 <template>
 <div class="rsvp">
-    <div class="row rsvpform">
+    <div class="row rsvpform z-depth-1">
         <div class="col">
             <div class="col-md-auto">
             <form>
                 <h2 class="formtitle">RSVP Form</h2>
                 <div class="form-group fname">
-                    <label for="firstname">First name</label>
-                    <input id="firstname" name="firstname" class="form-control" required v-model="firstname"/>
+                    <!--<label for="firstname">First name</label>-->
+                    <input id="firstname" name="firstname" class="form-control" placeholder="First Name" required v-model="firstname"/>
                 </div>
                 <div class="form-group lname">
-                    <label for="lastname">Last name</label>
-                    <input id="lastname" name="lastname" class="form-control" required v-model="lastname"/>
+                    <!--<label for="lastname">Last name</label>-->
+                    <input id="lastname" name="lastname" class="form-control" placeholder="Last Name" required v-model="lastname"/>
                 </div>
                 <div class="form-group emailaddress">
-                    <label for="emailaddress">Email address</label>
-                    <input type="email" class="form-control" id="emailaddress" name="emailaddress" required aria-describedby="emailHelp" v-model="email">
+                    <!--<label for="emailaddress">Email address</label>-->
+                    <input type="email" class="form-control" id="emailaddress" name="emailaddress" placeholder="Email" required aria-describedby="emailHelp" v-model="email">
                 </div>
                 <div class="form-group">
                     <label class="response">Response:</label>
@@ -48,7 +48,7 @@
                         <label class="form-check-label" for="glutenFree">Gluten-Free</label>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-dark rsvpsubmit" v-on:click="addGuest">Submit</button>
+                <button type="submit" class="btn btn-dark btn-block rsvpsubmit" v-on:click="addGuest">Submit</button>
                 <!--used for debugging, output user input to table
                     <table class="table  table-striped mt-5">
                     <thead class="thead-dark">
@@ -93,16 +93,7 @@ export default {
     },
     methods: {
         addGuest: function () {
-            if(!this.firstname) {
-                alert("First name is required");
-            }
-            else if(!this.lastname) {
-                alert("Last name is required");
-            }
-            else if(!this.email) {
-                alert("Email is required");
-            }
-            else if(this.firstname && this.lastname && this.email) {
+            if(this.firstname && this.lastname && this.checkEmailAddress()) {
                 this.sendEmail();
                 alert("Thank you! Your response has been recorded! XOXO, Kevin and Chas");
                 console.log(`Adding guest ${this.firstname} ${this.lastname} ${this.email} ${this.confirmed} ${this.allergies}`);
@@ -131,6 +122,14 @@ export default {
             }, (error) => {
                 console.log('FAILED...', error);
             });
+        },
+        checkEmailAddress: function() {
+            var email_regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+            if(this.email.match(email_regex)) {
+                return true;
+            }
+            alert("Error: please enter a valid email address")
+            return false;
         }
     }
 }
