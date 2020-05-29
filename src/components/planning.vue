@@ -191,9 +191,34 @@
     </section>
     <section id="partysection">
         <h4 class="font-weight-bold black-text mb-4 pb-2">Wedding Party</h4>
+        <a class="partysheet" href="https://docs.google.com/spreadsheets/d/1lhdtEqxjbJppjwmtN0CG7L6zn02UqJ8Y13dtB09iAhI/edit#gid=0">Click to edit</a>
+        <p>{{partyppl}}</p>
     </section>
 </div>
 </template>
+
+<script>
+import axios from "axios";
+
+export default {
+  name: 'planning',
+  data() {
+    return {
+      partyppl: []
+    }
+  },
+  mounted() {
+    axios
+      .get("https://sheetsu.com/apis/v1.0su/eded8760576f")
+      .then(response => {
+          this.partyppl = response.data;
+      })
+      .catch(error => {
+          console.log('Request failed', error);
+      });
+  }
+}
+</script>
 
 <style>
 .planningtopic1, .planningtopic2, .planningtopic3, .planningtopic4 {
