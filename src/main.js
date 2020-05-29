@@ -13,6 +13,7 @@ import { faGlassCheers } from '@fortawesome/free-solid-svg-icons'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon, FontAwesomeLayers, FontAwesomeLayersText } from '@fortawesome/vue-fontawesome'
+import vuetify from './plugins/vuetify';
 
 
 library.add(faTasks,faUsers,faMoneyBill,faUtensils,faClock,faGlassCheers,faEdit,faTrashAlt)
@@ -25,5 +26,6 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
-  render: h => h(App),
+  vuetify,
+  render: h => h(App)
 }).$mount('#app')

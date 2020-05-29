@@ -63,122 +63,80 @@
         <h4 class="font-weight-bold black-text mb-4 pb-2">Deadlines</h4>
     </section>
     <section id="tasks">
-        <h4 class="font-weight-bold black-text mb-4 pb-2">Tasks</h4>
-        <div class="row">
-            <div class="col-12">
-                <div class="card card-list">
-                    <div class="card-header white d-flex justify-content-between align-items-center py-3">
-                        <p class="h5-responsive font-weight-bold mb-0"><i class="fas fa-clipboard-list pr-2"></i>To Do List</p>
-                        <nav aria-label="Page navigation example">
-                        <ul class="pagination pg-blue mb-0">
-                            <li class="page-item">
-                            <a class="border page-link" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            </li>
-                            <li class="page-item"><a class="border page-link">1</a></li>
-                            <li class="page-item"><a class="border page-link">2</a></li>
-                            <li class="page-item"><a class="border page-link">3</a></li>
-                            <li class="page-item">
-                            <a class="border page-link" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                            </li>
-                        </ul>
-                        </nav>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-unstyled mb-0">
-                        <li class="d-flex justify-content-between align-items-center py-2 border-bottom">
-                            <div class="d-inline-flex">
-                            <div class="form-check pl-0">
-                                <input type="checkbox" class="form-check-input" id="materialChecked2">
-                                <label class="form-check-label" for="materialChecked2"></label>
-                            </div>
-                            <p class="mb-0"><span class="text">Design a nice theme</span></p>
-                            </div>
-                            <div class="tools">
-                            <a class="modtask"><font-awesome-icon :icon="['fas', 'edit']"/></a>
-                            <a class="modtask"><font-awesome-icon :icon="['fas', 'trash-alt']"/></a>
-                            </div>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center py-2 border-bottom">
-                            <div class="d-inline-flex">
-                            <div class="form-check pl-0">
-                                <input type="checkbox" class="form-check-input" id="materialChecked3">
-                                <label class="form-check-label" for="materialChecked3"></label>
-                            </div>
-                            <p class="mb-0"><span class="text">Make the theme responsive</span></p>
-                            </div>
-                            <div class="tools">
-                            <a class="modtask"><font-awesome-icon :icon="['fas', 'edit']"/></a>
-                            <a class="modtask"><font-awesome-icon :icon="['fas', 'trash-alt']"/></a>
-                            </div>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center py-2 border-bottom">
-                            <div class="d-inline-flex">
-                            <div class="form-check pl-0">
-                                <input type="checkbox" class="form-check-input" id="materialChecked4">
-                                <label class="form-check-label" for="materialChecked4"></label>
-                            </div>
-                            <p class="mb-0"><span class="text">Let theme shine like a star</span></p>
-                            </div>
-                            <div class="tools">
-                            <a class="modtask"><font-awesome-icon :icon="['fas', 'edit']"/></a>
-                            <a class="modtask"><font-awesome-icon :icon="['fas', 'trash-alt']"/></a>
-                            </div>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center py-2 border-bottom">
-                            <div class="d-inline-flex">
-                            <div class="form-check pl-0">
-                                <input type="checkbox" class="form-check-input" id="materialChecked5">
-                                <label class="form-check-label" for="materialChecked5"></label>
-                            </div>
-                            <p class="mb-0"><span class="text">Let theme shine like a star</span></p>
-                            </div>
-                            <div class="tools">
-                            <a class="modtask"><font-awesome-icon :icon="['fas', 'edit']"/></a>
-                            <a class="modtask"><font-awesome-icon :icon="['fas', 'trash-alt']"/></a>
-                            </div>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center py-2 border-bottom">
-                            <div class="d-inline-flex">
-                            <div class="form-check pl-0">
-                                <input type="checkbox" class="form-check-input" id="materialChecked6">
-                                <label class="form-check-label" for="materialChecked6"></label>
-                            </div>
-                            <p class="mb-0"><span class="text">Check your messages and notifications</span></p>
-                            </div>
-                            <div class="tools">
-                            <a class="modtask"><font-awesome-icon :icon="['fas', 'edit']"/></a>
-                            <a class="modtask"><font-awesome-icon :icon="['fas', 'trash-alt']"/></a>
-                            </div>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center pt-2 pb-1">
-                            <div class="d-inline-flex">
-                            <div class="form-check pl-0">
-                                <input type="checkbox" class="form-check-input" id="materialChecked7">
-                                <label class="form-check-label" for="materialChecked7"></label>
-                            </div>
-                            <p class="mb-0"><span class="text">Let theme shine like a star</span></p>
-                            </div>
-                            <div class="tools">
-                            <a class="modtask"><font-awesome-icon :icon="['fas', 'edit']"/></a>
-                            <a class="modtask"><font-awesome-icon :icon="['fas', 'trash-alt']"/></a>
-                            </div>
-                        </li>
-                        </ul>
-                    </div>
-                    <div class="card-footer white py-3">
-                        <div class="text-right">
-                            <button class="btn btn-primary btn-md px-3 my-0 mr-0">Add item<i class="fas fa-plus pl-2"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+          <v-data-table
+    :headers="headers"
+    :items="desserts"
+    sort-by="calories"
+    class="elevation-1"
+  >
+    <template v-slot:top>
+      <v-toolbar flat color="white">
+        <v-toolbar-title>My CRUD</v-toolbar-title>
+        <v-divider
+          class="mx-4"
+          inset
+          vertical
+        ></v-divider>
+        <v-spacer></v-spacer>
+      </v-toolbar>
+    </template>
+    <template v-slot:item.actions="{ item }">
+      <v-icon
+        small
+        class="mr-2"
+        @click="editItem(item);dialog = true"
+      >
+        mdi-pencil
+      </v-icon>
+      <v-icon
+        small
+        @click="deleteItem(item)"
+      >
+        mdi-delete
+      </v-icon>
+    </template>
+    <template v-slot:no-data>
+      <v-btn color="primary" @click="initialize">Reset</v-btn>
+    </template>
+  </v-data-table>
+  <v-dialog v-model="dialog" max-width="500px">
+          <template v-slot:activator="{ on }">
+            <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+          </template>
+          <v-card>
+            <v-card-title>
+              <span class="headline">{{ formTitle }}</span>
+            </v-card-title>
+
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-text-field v-model="editedItem.name" label="Dessert name"></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+              <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
     </section>
     <section id="guests">
         <h4 class="font-weight-bold black-text mb-4 pb-2">Guests</h4>
@@ -202,12 +160,57 @@ import axios from "axios";
 
 export default {
   name: 'planning',
-  data() {
-    return {
-      partyppl: []
-    }
-  },
-  mounted() {
+    data: () => ({
+      partyppl: [],
+      dialog: false,
+      headers: [
+        {
+          text: 'Dessert (100g serving)',
+          align: 'start',
+          sortable: false,
+          value: 'name',
+        },
+        { text: 'Calories', value: 'calories' },
+        { text: 'Fat (g)', value: 'fat' },
+        { text: 'Carbs (g)', value: 'carbs' },
+        { text: 'Protein (g)', value: 'protein' },
+        { text: 'Actions', value: 'actions', sortable: false },
+      ],
+      desserts: [],
+      editedIndex: -1,
+      editedItem: {
+        name: '',
+        calories: 0,
+        fat: 0,
+        carbs: 0,
+        protein: 0,
+      },
+      defaultItem: {
+        name: '',
+        calories: 0,
+        fat: 0,
+        carbs: 0,
+        protein: 0,
+      },
+    }),
+
+    computed: {
+      formTitle () {
+        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+      },
+    },
+
+    watch: {
+      dialog (val) {
+        val || this.close()
+      },
+    },
+
+    created () {
+      this.initialize()
+    },
+
+    mounted() {
     axios
       .get("https://sheetsu.com/apis/v1.0su/eded8760576f")
       .then(response => {
@@ -216,8 +219,113 @@ export default {
       .catch(error => {
           console.log('Request failed', error);
       });
+    },
+
+    methods: {
+      initialize () {
+        this.desserts = [
+          {
+            name: 'Frozen Yogurt',
+            calories: 159,
+            fat: 6.0,
+            carbs: 24,
+            protein: 4.0,
+          },
+          {
+            name: 'Ice cream sandwich',
+            calories: 237,
+            fat: 9.0,
+            carbs: 37,
+            protein: 4.3,
+          },
+          {
+            name: 'Eclair',
+            calories: 262,
+            fat: 16.0,
+            carbs: 23,
+            protein: 6.0,
+          },
+          {
+            name: 'Cupcake',
+            calories: 305,
+            fat: 3.7,
+            carbs: 67,
+            protein: 4.3,
+          },
+          {
+            name: 'Gingerbread',
+            calories: 356,
+            fat: 16.0,
+            carbs: 49,
+            protein: 3.9,
+          },
+          {
+            name: 'Jelly bean',
+            calories: 375,
+            fat: 0.0,
+            carbs: 94,
+            protein: 0.0,
+          },
+          {
+            name: 'Lollipop',
+            calories: 392,
+            fat: 0.2,
+            carbs: 98,
+            protein: 0,
+          },
+          {
+            name: 'Honeycomb',
+            calories: 408,
+            fat: 3.2,
+            carbs: 87,
+            protein: 6.5,
+          },
+          {
+            name: 'Donut',
+            calories: 452,
+            fat: 25.0,
+            carbs: 51,
+            protein: 4.9,
+          },
+          {
+            name: 'KitKat',
+            calories: 518,
+            fat: 26.0,
+            carbs: 65,
+            protein: 7,
+          },
+        ]
+      },
+
+      editItem (item) {
+        this.editedIndex = this.desserts.indexOf(item)
+        this.editedItem = Object.assign({}, item)
+        this.dialog = true
+      },
+
+      deleteItem (item) {
+        const index = this.desserts.indexOf(item)
+        confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
+      },
+
+      close () {
+        this.dialog = false
+        this.$nextTick(() => {
+          this.editedItem = Object.assign({}, this.defaultItem)
+          this.editedIndex = -1
+        })
+      },
+
+      save () {
+        if (this.editedIndex > -1) {
+          Object.assign(this.desserts[this.editedIndex], this.editedItem)
+        } else {
+          this.desserts.push(this.editedItem)
+        }
+        this.close()
+      },
+    },
   }
-}
 </script>
 
 <style>
