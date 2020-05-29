@@ -1,5 +1,5 @@
 <template>
-<div class="planning">
+<div data-app class="planning">
     <section class="dark-grey-text text-center planningintro">
         <h3 class="font-weight-bold black-text mb-4 pb-2">Planning Hub</h3>
         <hr class="w-header"/>
