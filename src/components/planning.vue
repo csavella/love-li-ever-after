@@ -228,7 +228,58 @@
         </v-data-table>
     </section>
     <section id="vendors">
-        <h4 class="font-weight-bold black-text mb-4 pb-2">Vendors</h4>
+        <v-data-table :headers="vendorheaders" :items="vendors" sort-by="name" class="elevation-1">
+            <template v-slot:top>
+                <v-toolbar flat color="white">
+                    <v-toolbar-title>Vendors</v-toolbar-title>
+                    <v-divider class="mx-4" inset vertical></v-divider>
+                    <v-spacer></v-spacer>
+                    <v-dialog v-model="vendordialog" max-width="500px">
+                        <template v-slot:activator="{ on }">
+                            <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+                        </template>
+                        <v-card>
+                            <v-card-title>
+                            <span class="headline">{{ formTitle }}</span>
+                            </v-card-title>
+                            <v-card-text>
+                                <v-container>
+                                    <v-row>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="editedVendor.name" label="Name"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="editedVendor.category" label="Category"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="editedVendor.cost" label="Cost"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="editedVendor.booked" label="Booked"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="editedVendor.notes" label="Notes"></v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="blue darken-1" text @click="closeVendor">Cancel</v-btn>
+                                <v-btn color="blue darken-1" text @click="saveVendor">Save</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                </v-toolbar>
+            </template>
+            <template v-slot:item.actions="{ item }">
+                <v-icon small class="mr-2" @click="editVendor(item)">mdi-pencil</v-icon>
+                <v-icon small @click="deleteVendor(item)">mdi-delete</v-icon>
+            </template>
+            <template v-slot:no-data>
+                <v-btn color="primary" @click="initialize">Reset</v-btn>
+            </template>
+        </v-data-table>
     </section>
     <section id="partysection">
         <h4 class="font-weight-bold black-text mb-4 pb-2">Wedding Party</h4>
@@ -299,11 +350,31 @@ export default {
         { text: 'Projected Cost', value: 'projectedcost' },
         { text: 'Actual Cost', value: 'actualcost' },
         { text: 'Booked/Bought', value: 'booked' },
-        { text: 'Notes', value: 'notes' },
+        { text: 'Notes', value: 'notes', sortable: false },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
       editedBitem: { name: '', projectedcost: '', actualcost: '', booked: false, notes: '' },
       defaultBitem: { name: '', projectedcost: '', actualcost: '', booked: false, notes: '' },
+
+      /*vendor section*/
+      vendors: [],
+      vendordialog: false,
+      vendorheaders: [
+        {
+          text: 'Name',
+          align: 'start',
+          sortable: false,
+          value: 'name',
+        },
+        { text: 'Category', value: 'category' },
+        { text: 'Cost', value: 'cost' },
+        { text: 'Booked', value: 'booked' },
+        { text: 'Notes', value: 'notes', sortable: false },
+        { text: 'Actions', value: 'actions', sortable: false },
+      ],
+      editedVendor: { name: '', category: '', cost: '', booked: false, notes: '' },
+      defaultVendor: { name: '', category: '', cost: '', booked: false, notes: '' },
+
     }),
 
     computed: {
@@ -322,6 +393,9 @@ export default {
       budgetdialog (val) {
         val || this.closeBitem()
       },
+      vendordialog (val) {
+        val || this.closeVendor()
+      }
     },
 
     created () {
@@ -396,6 +470,36 @@ export default {
                 actualcost: 0, 
                 booked: false,
                 notes: '' 
+            },
+        ],
+        this.vendors = [
+            { 
+                name: 'Olowalu Plantation House', 
+                category: 'venue', 
+                cost: 10000,
+                booked: true,
+                notes: '' 
+            },
+            { 
+                name: 'Tropical Maui Weddings', 
+                category: 'wedding planner', 
+                cost: 5000,
+                booked: true,
+                notes: '' 
+            },
+            {
+                name: 'Leahana Byrd', 
+                category: 'photography', 
+                cost: 2000,
+                booked: false,
+                notes: '2 hour session' 
+            },
+            {
+                name: 'Anna Kim', 
+                category: 'photography', 
+                cost: 3000,
+                booked: false,
+                notes: '4 hour session' 
             },
         ]
       },
@@ -487,6 +591,34 @@ export default {
         this.closeBitem()
       },
 
+      /*vendor actions*/
+      editVendor (item) {
+        this.editedIndex = this.vendors.indexOf(item)
+        this.editedVendor = Object.assign({}, item)
+        this.vendordialog = true
+      },
+
+      deleteVendor (item) {
+        const index = this.vendors.indexOf(item)
+        confirm('Are you sure you want to delete this item?') && this.vendors.splice(index, 1)
+      },
+
+      closeVendor () {
+        this.vendordialog = false
+        this.$nextTick(() => {
+          this.editedVendor = Object.assign({}, this.defaultVendor)
+          this.editedIndex = -1
+        })
+      },
+
+      saveVendor () {
+        if (this.editedIndex > -1) {
+          Object.assign(this.vendors[this.editedIndex], this.editedVendor)
+        } else {
+          this.vendors.push(this.editedVendor)
+        }
+        this.closeVendor()
+      },
     },
   }
 </script>
