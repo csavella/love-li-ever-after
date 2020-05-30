@@ -103,7 +103,7 @@ export default {
   height: 100vh;
 }
 
-.container {
+.greyblock {
   opacity: 0.7;
 }
 
