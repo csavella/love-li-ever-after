@@ -63,13 +63,13 @@
         <h4 class="font-weight-bold black-text mb-4 pb-2">Deadlines</h4>
     </section>
     <section id="tasks">
-        <v-data-table :headers="headers" :items="tasks" sort-by="duedate" class="elevation-1">
+        <v-data-table :headers="taskheaders" :items="tasks" sort-by="duedate" class="elevation-1">
             <template v-slot:top>
                 <v-toolbar flat color="white">
                     <v-toolbar-title>To do list</v-toolbar-title>
                     <v-divider class="mx-4" inset vertical></v-divider>
                     <v-spacer></v-spacer>
-                    <v-dialog v-model="dialog" max-width="500px">
+                    <v-dialog v-model="taskdialog" max-width="500px">
                         <template v-slot:activator="{ on }">
                             <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
                         </template>
@@ -81,35 +81,35 @@
                                 <v-container>
                                     <v-row>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="editedItem.todo" label="Task"></v-text-field>
+                                            <v-text-field v-model="editedTask.todo" label="Task"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="editedItem.owner" label="Owner"></v-text-field>
+                                            <v-text-field v-model="editedTask.owner" label="Owner"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="editedItem.duedate" label="Due date"></v-text-field>
+                                            <v-text-field v-model="editedTask.duedate" label="Due date"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="editedItem.prio" label="Priority"></v-text-field>
+                                            <v-text-field v-model="editedTask.prio" label="Priority"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="editedItem.notes" label="Notes"></v-text-field>
+                                            <v-text-field v-model="editedTask.notes" label="Notes"></v-text-field>
                                         </v-col>
                                     </v-row>
                                 </v-container>
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
-                                <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-                                <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+                                <v-btn color="blue darken-1" text @click="closeTask">Cancel</v-btn>
+                                <v-btn color="blue darken-1" text @click="saveTask">Save</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
                 </v-toolbar>
             </template>
             <template v-slot:item.actions="{ item }">
-                <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
-                <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
+                <v-icon small class="mr-2" @click="editTask(item)">mdi-pencil</v-icon>
+                <v-icon small @click="deleteTask(item)">mdi-delete</v-icon>
             </template>
             <template v-slot:no-data>
                 <v-btn color="primary" @click="initialize">Reset</v-btn>
@@ -117,10 +117,115 @@
         </v-data-table>
     </section>
     <section id="guests">
-        <h4 class="font-weight-bold black-text mb-4 pb-2">Guests</h4>
+        <v-data-table :headers="guestheaders" :items="guests" sort-by="lastname" class="elevation-1">
+            <template v-slot:top>
+                <v-toolbar flat color="white">
+                    <v-toolbar-title>Guest list</v-toolbar-title>
+                    <v-divider class="mx-4" inset vertical></v-divider>
+                    <v-spacer></v-spacer>
+                    <v-dialog v-model="guestdialog" max-width="500px">
+                        <template v-slot:activator="{ on }">
+                            <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+                        </template>
+                        <v-card>
+                            <v-card-title>
+                            <span class="headline">{{ formTitle }}</span>
+                            </v-card-title>
+                            <v-card-text>
+                                <v-container>
+                                    <v-row>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="editedGuest.lastname" label="Last Name"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="editedGuest.firstname" label="First name"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="editedGuest.email" label="Email"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="editedGuest.confirmed" label="Confirmed"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="editedGuest.type" label="Guest Type"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="editedGuest.diet" label="Dietary Restrictions"></v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="blue darken-1" text @click="closeGuest">Cancel</v-btn>
+                                <v-btn color="blue darken-1" text @click="saveGuest">Save</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                </v-toolbar>
+            </template>
+            <template v-slot:item.actions="{ item }">
+                <v-icon small class="mr-2" @click="editGuest(item)">mdi-pencil</v-icon>
+                <v-icon small @click="deleteGuest(item)">mdi-delete</v-icon>
+            </template>
+            <template v-slot:no-data>
+                <v-btn color="primary" @click="initialize">Reset</v-btn>
+            </template>
+        </v-data-table>
     </section>
     <section id="budget">
-        <h4 class="font-weight-bold black-text mb-4 pb-2">Budget</h4>
+        <v-data-table :headers="budgetheaders" :items="bitems" sort-by="actualcost" class="elevation-1">
+            <template v-slot:top>
+                <v-toolbar flat color="white">
+                    <v-toolbar-title>Budget</v-toolbar-title>
+                    <v-divider class="mx-4" inset vertical></v-divider>
+                    <v-spacer></v-spacer>
+                    <v-dialog v-model="budgetdialog" max-width="500px">
+                        <template v-slot:activator="{ on }">
+                            <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+                        </template>
+                        <v-card>
+                            <v-card-title>
+                            <span class="headline">{{ formTitle }}</span>
+                            </v-card-title>
+                            <v-card-text>
+                                <v-container>
+                                    <v-row>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="editedBitem.name" label="Item"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="editedBitem.projectedcost" label="Projected Cost"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="editedBitem.actualcost" label="Actual Cost"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="editedBitem.booked" label="Booked/Bought"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="editedBitem.notes" label="Notes"></v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="blue darken-1" text @click="closeBitem">Cancel</v-btn>
+                                <v-btn color="blue darken-1" text @click="saveBitem">Save</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                </v-toolbar>
+            </template>
+            <template v-slot:item.actions="{ item }">
+                <v-icon small class="mr-2" @click="editBitem(item)">mdi-pencil</v-icon>
+                <v-icon small @click="deleteBitem(item)">mdi-delete</v-icon>
+            </template>
+            <template v-slot:no-data>
+                <v-btn color="primary" @click="initialize">Reset</v-btn>
+            </template>
+        </v-data-table>
     </section>
     <section id="vendors">
         <h4 class="font-weight-bold black-text mb-4 pb-2">Vendors</h4>
@@ -140,9 +245,11 @@ export default {
   name: 'planning',
     data: () => ({
       partyppl: [],
+
+      /*tasks for todo list*/
       tasks: [],
-      dialog: false,
-      headers: [
+      taskdialog: false,
+      taskheaders: [
         {
           text: 'Task',
           align: 'start',
@@ -156,20 +263,47 @@ export default {
         { text: 'Actions', value: 'actions', sortable: false },
       ],
       editedIndex: -1,
-      editedItem: {
-        todo: '',
-        owner: '',
-        duedate: '',
-        prio: 0,
-        notes: '',
-      },
-      defaultItem: {
-        todo: '',
-        owner: '',
-        duedate: '',
-        prio: 0,
-        notes: '',
-      },
+      editedTask: { todo: '', owner: '', duedate: '', prio: 0, notes: '', },
+      defaultTask: { todo: '', owner: '', duedate: '', prio: 0, notes: '', },
+      
+      /*guest section*/
+      guests: [],
+      guestdialog: false,
+      guestheaders: [
+        {
+          text: 'Last Name',
+          align: 'start',
+          sortable: true,
+          value: 'lastname',
+        },
+        { text: 'First Name', value: 'firstname' },
+        { text: 'Email', value: 'email' },
+        { text: 'Confirmed', value: 'confirmed' },
+        { text: 'Guest Type', value: 'type' },
+        { text: 'Dietary Restrictions', value: 'diet', sortable: false },
+        { text: 'Actions', value: 'actions', sortable: false },
+      ],
+      editedGuest: { lastname: '', firstname: '', email: '', confirmed: false, type: '', diet: '' },
+      defaultGuest: { lastname: '', firstname: '', email: '', confirmed: false, type: '', diet: '' },
+
+      /*budget section*/
+      bitems: [],
+      budgetdialog: false,
+      budgetheaders: [
+        {
+          text: 'Item',
+          align: 'start',
+          sortable: true,
+          value: 'name',
+        },
+        { text: 'Projected Cost', value: 'projectedcost' },
+        { text: 'Actual Cost', value: 'actualcost' },
+        { text: 'Booked/Bought', value: 'booked' },
+        { text: 'Notes', value: 'notes' },
+        { text: 'Actions', value: 'actions', sortable: false },
+      ],
+      editedBitem: { name: '', projectedcost: '', actualcost: '', booked: false, notes: '' },
+      defaultBitem: { name: '', projectedcost: '', actualcost: '', booked: false, notes: '' },
     }),
 
     computed: {
@@ -179,8 +313,14 @@ export default {
     },
 
     watch: {
-      dialog (val) {
-        val || this.close()
+      taskdialog (val) {
+        val || this.closeTask()
+      },
+      guestdialog (val) {
+        val || this.closeGuest()
+      },
+      budgetdialog (val) {
+        val || this.closeBitem()
       },
     },
 
@@ -223,36 +363,130 @@ export default {
             prio: 2,
             notes: 'Contact Lori about vacation rentals',
           },
+        ],
+        this.guests = [
+            { 
+                lastname: 'Savella', 
+                firstname: 'Eddie', 
+                email: 'es@gmail.com', 
+                confirmed: true, 
+                type: 'family', 
+                diet: '' 
+            },
+            { 
+                lastname: 'Li', 
+                firstname: 'Quan', 
+                email: 'ql@gmail.com', 
+                confirmed: true, 
+                type: 'family', 
+                diet: '' 
+            },
+        ],
+        this.bitems = [
+            { 
+                name: 'venue', 
+                projectedcost: 8000, 
+                actualcost: 10000,
+                booked: true,
+                notes: 'Olowalu Plantation House' 
+            },
+            { 
+                name: 'caterer', 
+                projectedcost: 3000, 
+                actualcost: 0, 
+                booked: false,
+                notes: '' 
+            },
         ]
       },
 
-      editItem (item) {
+    /*task actions*/
+      editTask (item) {
         this.editedIndex = this.tasks.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialog = true
+        this.editedTask = Object.assign({}, item)
+        this.taskdialog = true
       },
 
-      deleteItem (item) {
+      deleteTask (item) {
         const index = this.tasks.indexOf(item)
         confirm('Are you sure you want to delete this item?') && this.tasks.splice(index, 1)
       },
 
-      close () {
-        this.dialog = false
+      closeTask () {
+        this.taskdialog = false
         this.$nextTick(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
+          this.editedTask = Object.assign({}, this.defaultTask)
           this.editedIndex = -1
         })
       },
 
-      save () {
+      saveTask () {
         if (this.editedIndex > -1) {
-          Object.assign(this.tasks[this.editedIndex], this.editedItem)
+          Object.assign(this.tasks[this.editedIndex], this.editedTask)
         } else {
-          this.tasks.push(this.editedItem)
+          this.tasks.push(this.editedTask)
         }
-        this.close()
+        this.closeTask()
       },
+
+      /*guest actions*/
+      editGuest (item) {
+        this.editedIndex = this.guests.indexOf(item)
+        this.editedGuest = Object.assign({}, item)
+        this.guestdialog = true
+      },
+
+      deleteGuest (item) {
+        const index = this.guests.indexOf(item)
+        confirm('Are you sure you want to delete this item?') && this.guests.splice(index, 1)
+      },
+
+      closeGuest () {
+        this.guestdialog = false
+        this.$nextTick(() => {
+          this.editedGuest = Object.assign({}, this.defaultGuest)
+          this.editedIndex = -1
+        })
+      },
+
+      saveGuest () {
+        if (this.editedIndex > -1) {
+          Object.assign(this.guests[this.editedIndex], this.editedGuest)
+        } else {
+          this.guests.push(this.editedGuest)
+        }
+        this.closeGuest()
+      },
+
+      /*budget actions*/
+      editBitem (item) {
+        this.editedIndex = this.bitems.indexOf(item)
+        this.editedBitem = Object.assign({}, item)
+        this.budgetdialog = true
+      },
+
+      deleteBitem (item) {
+        const index = this.bitems.indexOf(item)
+        confirm('Are you sure you want to delete this item?') && this.bitems.splice(index, 1)
+      },
+
+      closeBitem () {
+        this.budgetdialog = false
+        this.$nextTick(() => {
+          this.editedBitem = Object.assign({}, this.defaultBitem)
+          this.editedIndex = -1
+        })
+      },
+
+      saveBitem () {
+        if (this.editedIndex > -1) {
+          Object.assign(this.bitems[this.editedIndex], this.editedBitem)
+        } else {
+          this.bitems.push(this.editedBitem)
+        }
+        this.closeBitem()
+      },
+
     },
   }
 </script>
