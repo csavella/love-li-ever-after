@@ -282,9 +282,55 @@
         </v-data-table>
     </section>
     <section id="partysection">
-        <h4 class="font-weight-bold black-text mb-4 pb-2">Wedding Party</h4>
+        <v-data-table :headers="partyheaders" :items="partyppl" sort-by="role" class="elevation-1">
+            <template v-slot:top>
+                <v-toolbar flat color="white">
+                    <v-toolbar-title>Wedding Party</v-toolbar-title>
+                    <v-divider class="mx-4" inset vertical></v-divider>
+                    <v-spacer></v-spacer>
+                    <v-dialog v-model="partydialog" max-width="500px">
+                        <template v-slot:activator="{ on }">
+                            <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+                        </template>
+                        <v-card>
+                            <v-card-title>
+                            <span class="headline">{{ formTitle }}</span>
+                            </v-card-title>
+                            <v-card-text>
+                                <v-container>
+                                    <v-row>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="editedPerson.lastname" label="Last Name"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="editedPerson.firstname" label="First Name"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="editedPerson.role" label="Role"></v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="blue darken-1" text @click="closePerson">Cancel</v-btn>
+                                <v-btn color="blue darken-1" text @click="savePerson">Save</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                </v-toolbar>
+            </template>
+            <template v-slot:item.actions="{ item }">
+                <v-icon small class="mr-2" @click="editPerson(item)">mdi-pencil</v-icon>
+                <v-icon small @click="deletePerson(item)">mdi-delete</v-icon>
+            </template>
+            <template v-slot:no-data>
+                <v-btn color="primary" @click="initialize">Reset</v-btn>
+            </template>
+        </v-data-table>
         <a class="partysheet" href="https://docs.google.com/spreadsheets/d/1lhdtEqxjbJppjwmtN0CG7L6zn02UqJ8Y13dtB09iAhI/edit#gid=0">Click to edit</a>
-        <p>{{partyppl}}</p>
+        <p>{{partyppl2}}</p>
+        
     </section>
 </div>
 </template>
@@ -295,7 +341,7 @@ import axios from "axios";
 export default {
   name: 'planning',
     data: () => ({
-      partyppl: [],
+      partyppl2: [],
 
       /*tasks for todo list*/
       tasks: [],
@@ -375,6 +421,23 @@ export default {
       editedVendor: { name: '', category: '', cost: '', booked: false, notes: '' },
       defaultVendor: { name: '', category: '', cost: '', booked: false, notes: '' },
 
+      /*partay section*/
+      partyppl: [],
+      partydialog: false,
+      partyheaders: [
+        {
+          text: 'Last Name',
+          align: 'start',
+          sortable: true,
+          value: 'lastname',
+        },
+        { text: 'First name', value: 'firstname' },
+        { text: 'Role', value: 'role' },
+        { text: 'Actions', value: 'actions', sortable: false },
+      ],
+      editedPerson: { lastname: '', firstname: '', role: '' },
+      defaultPerson: { lastname: '', firstname: '', role: '' },
+
     }),
 
     computed: {
@@ -395,6 +458,9 @@ export default {
       },
       vendordialog (val) {
         val || this.closeVendor()
+      },
+      partydialog (val) {
+        val || this.closePerson()
       }
     },
 
@@ -406,7 +472,7 @@ export default {
     axios
       .get("https://sheetsu.com/apis/v1.0su/eded8760576f")
       .then(response => {
-          this.partyppl = response.data;
+          this.partyppl2 = response.data;
       })
       .catch(error => {
           console.log('Request failed', error);
@@ -500,6 +566,18 @@ export default {
                 cost: 3000,
                 booked: false,
                 notes: '4 hour session' 
+            },
+        ],
+        this.partyppl = [
+            { 
+                lastname: 'Li', 
+                firstname: 'Kevin', 
+                role: 'groom' 
+            },
+            { 
+                lastname: 'Savella', 
+                firstname: 'Chasity', 
+                role: 'bride' 
             },
         ]
       },
@@ -618,6 +696,36 @@ export default {
           this.vendors.push(this.editedVendor)
         }
         this.closeVendor()
+      },
+
+      
+      /*party actions*/
+      editPerson (item) {
+        this.editedIndex = this.partyppl.indexOf(item)
+        this.editedPerson = Object.assign({}, item)
+        this.partydialog = true
+      },
+
+      deletePerson (item) {
+        const index = this.partyppl.indexOf(item)
+        confirm('Are you sure you want to delete this item?') && this.partyppl.splice(index, 1)
+      },
+
+      closePerson () {
+        this.partydialog = false
+        this.$nextTick(() => {
+          this.editedPerson = Object.assign({}, this.defaultPerson)
+          this.editedIndex = -1
+        })
+      },
+
+      savePerson () {
+        if (this.editedIndex > -1) {
+          Object.assign(this.partyppl[this.editedIndex], this.editedPerson)
+        } else {
+          this.partyppl.push(this.editedPerson)
+        }
+        this.closePerson()
       },
     },
   }
