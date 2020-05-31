@@ -283,6 +283,7 @@
                 <v-btn color="primary" @click="initialize">Reset</v-btn>
             </template>
         </v-data-table>
+        <button class="btn btn-info" @click="newTab(vendorsheeturl)">Click to edit in Google Sheets</button>
     </section>
     <section id="partysection">
         <v-data-table :headers="partyheaders" :items="partyppl" sort-by="role" class="elevation-1">
@@ -346,6 +347,7 @@ export default {
       budgetAPIdata: [],
       guestsAPIdata: [],
       tasksAPIdata: [],
+      vendorsAPIdata: [],
 
       /*tasks for todo list*/
       tasksheeturl: "https://docs.google.com/spreadsheets/d/1Oe7CQ2btK8q0GZOS_P34EaMe83vt6lUvfA8J_AEMw6k/edit#gid=0",
@@ -410,6 +412,7 @@ export default {
       defaultBitem: { name: '', projectedcost: '', actualcost: '', booked: false, notes: '' },
 
       /*vendor section*/
+      vendorsheeturl: "https://docs.google.com/spreadsheets/d/1tTMz69WH7hiM1fXKWWZwu42C8uHrSKmpn-NxvTmkYDg/edit#gid=0",
       vendors: [],
       vendordialog: false,
       vendorheaders: [
@@ -481,19 +484,22 @@ export default {
         let sheetsuBudget = "https://sheetsu.com/apis/v1.0su/de90e9842a02"
         let sheetsuGuests = "https://sheetsu.com/apis/v1.0su/33fd43026ba4"
         let sheetsuTasks = "https://sheetsu.com/apis/v1.0su/94ecf0a90f73"
+        let sheetsuVendors = "https://sheetsu.com/apis/v1.0su/02e39cefb1c3"
 
         const requestParty = axios.get(sheetsuParty);
         const requestBudget = axios.get(sheetsuBudget);
         const requestGuests = axios.get(sheetsuGuests);
         const requestTasks = axios.get(sheetsuTasks);
+        const requestVendors = axios.get(sheetsuVendors);
 
-        axios.all([requestParty,requestBudget,requestGuests,requestTasks
+        axios.all([requestParty,requestBudget,requestGuests,requestTasks,requestVendors
         ]).then(axios.spread((...responses) => {
 
             const responseParty = responses[0].data
             const responseBudget = responses[1].data
             const responseGuests = responses[2].data
             const responseTasks = responses[3].data
+            const responseVendors = responses[4].data
 
             this.partypplAPIdata = responseParty;
             this.addparty();
@@ -506,6 +512,9 @@ export default {
 
             this.tasksAPIdata = responseTasks;
             this.addtasks();
+
+            this.tasksAPIdata = responseVendors;
+            this.addvendors();
 
         })).catch(errors => {
             console.log('Request failed', errors);
@@ -562,6 +571,18 @@ export default {
                   duedate: this.tasksAPIdata[i].duedate,
                   prio: this.tasksAPIdata[i].prio,
                   notes: this.tasksAPIdata[i].notes
+              })
+          }
+      },
+
+      addvendors() {
+          for (var i = 0; i < this.vendorsAPIdata.length; i++) {
+              this.vendors.push({
+                  name: this.vendorsAPIdata[i].name,
+                  category: this.vendorsAPIdata[i].category,
+                  cost: this.vendorsAPIdata[i].cost,
+                  booked: this.vendorsAPIdata[i].booked,
+                  notes: this.vendorsAPIdata[i].notes
               })
           }
       },
