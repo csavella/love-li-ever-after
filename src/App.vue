@@ -1,7 +1,7 @@
 <template>
     <div id="app">
-      <v-app id="weddingapp">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
+      <!--<v-app id="weddingapp">-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" id="scroll-target">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-items">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -17,7 +17,10 @@
             </div>
         </nav>
         <router-view :time="times"></router-view>
-      </v-app>
+        <v-btn v-scroll="onScroll" v-show="fab" fab dark fixed bottom right color="info" @click="toTop">
+          <v-icon>mdi-chevron-up</v-icon>
+        </v-btn>          
+      <!--</v-app>-->
   </div>
 </template>
 
@@ -25,6 +28,7 @@
 export default {
   data() {
     return {
+    fab: false,
     startTime: Date.now(),
     endTime: "Sept 18, 2021 17:00:00",
     times: [
@@ -39,6 +43,14 @@ export default {
     }
   },
   methods: {
+    onScroll (e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset ||   e.target.scrollTop || 0
+      this.fab = top > 20
+    },
+    toTop () {
+      this.$vuetify.goTo(0)
+    },
     updateTimer: function() {
       if (
         this.times[3].time > 0 ||

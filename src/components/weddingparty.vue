@@ -1,18 +1,5 @@
 <template>
     <div class="party">
-        <v-container class="scroll-y">
-        <v-layout align-center justify-center>
-          <v-flex xs12>
-        <v-toolbar color="cyan" dark id="scroll-target">
-          <v-toolbar-side-icon></v-toolbar-side-icon>
-        </v-toolbar>
-          <v-btn v-scroll="onScroll" v-show="fab" fab dark fixed bottom right color="info" @click="toTop">
-            <v-icon>mdi-chevron-up</v-icon>
-          </v-btn>
-      </v-flex>
-          
-        </v-layout>
-      </v-container>
         <div class="smooth-scroll partyintro gmcards row">
             <div class="col-sm mb-4 groomsmen">
                 <div class="card gcard">
@@ -207,25 +194,6 @@
         </section>
     </div>
 </template>
-
-<script>
-export default {
-  name: 'party',
-  data: () => ({
-      fab: false
-  }),
-  methods: {
-    onScroll (e) {
-      if (typeof window === 'undefined') return
-      const top = window.pageYOffset ||   e.target.scrollTop || 0
-      this.fab = top > 20
-    },
-    toTop () {
-      this.$vuetify.goTo(0)
-    }
-  }
-}
-</script>
 
 <style>
 /* wedding party intro links */
