@@ -8,8 +8,8 @@
             <div class="col-md-3 mb-4 pt">
                 <a href="#deadlines" class="card hoverable planningtopic4">            
                     <div class="card-body my-4">
-                        <font-awesome-icon :icon="['fas', 'clock']" size="2x"/>
-                        <h5 class="black-text mb-0">Deadlines</h5>
+                        <font-awesome-icon :icon="['fas', 'lightbulb']" size="2x"/>
+                        <h5 class="black-text mb-0">Pinspiration</h5>
                     </div>
                 </a>
             </div>
@@ -58,10 +58,11 @@
         </div>
     </section>
     <hr><br><br>
-    <section id="blank"></section> 
     <section id="deadlines">
-        <h4 class="font-weight-bold black-text mb-4 pb-2">Deadlines</h4>
+        <v-img src="https://i.imgur.com/x7iOvan.png" class="pinspiration" alt="themes" max-width="1200" aspect-ratio="1.7" contain></v-img>
+        <v-img src="https://i.imgur.com/DnwpklI.png" class="pinspiration" alt="decor" max-width="1200" aspect-ratio="1.7" contain></v-img>
     </section>
+    <hr><br><br>
     <section id="tasks">
         <v-data-table :headers="taskheaders" :items="tasks" sort-by="duedate" class="elevation-1">
             <template v-slot:top>
@@ -117,6 +118,7 @@
         </v-data-table>
         <button class="btn btn-info" @click="newTab(tasksheeturl)">Click to edit in Google Sheets</button>
     </section>
+    <hr><br><br>
     <section id="guests">
         <v-data-table :headers="guestheaders" :items="guests" sort-by="lastname" class="elevation-1">
             <template v-slot:top>
@@ -175,6 +177,7 @@
         </v-data-table>
         <button class="btn btn-info" @click="newTab(guestsheeturl)">Click to edit in Google Sheets</button>
     </section>
+    <hr><br><br>
     <section id="budget">
         <v-data-table :headers="budgetheaders" :items="bitems" sort-by="actualcost" class="elevation-1">
             <template v-slot:top>
@@ -230,6 +233,7 @@
         </v-data-table>
         <button class="btn btn-info" @click="newTab(budgetsheeturl)">Click to edit in Google Sheets</button>
     </section>
+    <hr><br><br>
     <section id="vendors">
         <v-data-table :headers="vendorheaders" :items="vendors" sort-by="name" class="elevation-1">
             <template v-slot:top>
@@ -285,6 +289,7 @@
         </v-data-table>
         <button class="btn btn-info" @click="newTab(vendorsheeturl)">Click to edit in Google Sheets</button>
     </section>
+    <hr><br><br>
     <section id="partysection">
         <v-data-table :headers="partyheaders" :items="partyppl" sort-by="role" class="elevation-1">
             <template v-slot:top>
@@ -483,7 +488,7 @@ export default {
         let sheetsuParty = "https://sheetsu.com/apis/v1.0su/eded8760576f"
         let sheetsuBudget = "https://sheetsu.com/apis/v1.0su/de90e9842a02"
         let sheetsuGuests = "https://sheetsu.com/apis/v1.0su/33fd43026ba4"
-        let sheetsuTasks = "https://sheetsu.com/apis/v1.0su/94ecf0a90f73"
+        let sheetsuTasks = "https://sheetsu.com/apis/v1.0su/971084032f1d"
         let sheetsuVendors = "https://sheetsu.com/apis/v1.0su/02e39cefb1c3"
 
         const requestParty = axios.get(sheetsuParty);
@@ -741,13 +746,19 @@ export default {
 .planningtopic1, .planningtopic2, .planningtopic3, .planningtopic4 {
     color: maroon;
 }
-.pt {
+.pt, .pinspiration {
     padding: 10px;
     margin: auto;
 }
-#blank, #deadlines, #tasks, #guests, #budget, #vendors, #partysection, .planningintro {
-    height: 100vh;
-    width: 100vw;
+#deadlines {
+    height: 200vh;
+}
+
+#tasks, #guests, #budget, #vendors, #partysection, .planningintro {
+    height: 120%;
+    width: 90vw;
+    margin: auto;
+    padding: 5px;
 }
 .page-item {
     padding: 0;
