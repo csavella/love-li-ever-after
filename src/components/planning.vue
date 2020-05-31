@@ -513,7 +513,7 @@ export default {
             this.tasksAPIdata = responseTasks;
             this.addtasks();
 
-            this.tasksAPIdata = responseVendors;
+            this.vendorsAPIdata = responseVendors;
             this.addvendors();
 
         })).catch(errors => {
