@@ -226,6 +226,7 @@
                 <v-btn color="primary" @click="initialize">Reset</v-btn>
             </template>
         </v-data-table>
+        <button class="btn btn-info" @click="newTab(budgetsheeturl)">Click to edit in Google Sheets</button>
     </section>
     <section id="vendors">
         <v-data-table :headers="vendorheaders" :items="vendors" sort-by="name" class="elevation-1">
@@ -340,6 +341,7 @@ export default {
   name: 'planning',
     data: () => ({
       partypplAPIdata: [],
+      budgetAPIdata: [],
 
       /*tasks for todo list*/
       tasks: [],
@@ -382,6 +384,7 @@ export default {
       defaultGuest: { lastname: '', firstname: '', email: '', confirmed: false, type: '', diet: '' },
 
       /*budget section*/
+      budgetsheeturl: "https://docs.google.com/spreadsheets/d/1eoV8G5XFaQVjuLVnenA1ZxmhuMHRHjl0lUNNifiOcvs/edit#gid=0",
       bitems: [],
       budgetdialog: false,
       budgetheaders: [
@@ -468,15 +471,6 @@ export default {
     },
 
     mounted() {
-    /*axios
-      .get("https://sheetsu.com/apis/v1.0su/eded8760576f")
-      .then(response => {
-          this.partypplAPIdata = response.data;
-          this.addparty();
-      })
-      .catch(error => {
-          console.log('Request failed', error);
-      });*/
         let sheetsuParty = "https://sheetsu.com/apis/v1.0su/eded8760576f"
         let sheetsuBudget = "https://sheetsu.com/apis/v1.0su/de90e9842a02"
 
@@ -490,7 +484,9 @@ export default {
             this.partypplAPIdata = responseParty;
             this.addparty();
 
-            console.log(responseBudget)
+            this.budgetAPIdata = responseBudget;
+            this.addbudget();
+
         })).catch(errors => {
             console.log('Request failed', errors);
         })
@@ -539,7 +535,7 @@ export default {
                 diet: '' 
             },
         ],
-        this.bitems = [
+        /*this.bitems = [
             { 
                 name: 'venue', 
                 projectedcost: 8000, 
@@ -554,7 +550,7 @@ export default {
                 booked: false,
                 notes: '' 
             },
-        ],
+        ],*/
         this.vendors = [
             { 
                 name: 'Olowalu Plantation House', 
@@ -588,6 +584,18 @@ export default {
       },
       newTab(url) {
         window.open(url, "_blank");
+      },
+
+      addbudget() {
+        for (var i = 0; i < this.budgetAPIdata.length; i++) {
+              this.bitems.push({
+                  name: this.budgetAPIdata[i].name,
+                  projectedcost: this.budgetAPIdata[i].projectedcost,
+                  actualcost: this.budgetAPIdata[i].actualcost,
+                  booked: this.budgetAPIdata[i].booked,
+                  notes: this.budgetAPIdata[i].notes
+              })
+          }
       },
 
       addparty() {
