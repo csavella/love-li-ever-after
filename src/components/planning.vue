@@ -328,9 +328,7 @@
                 <v-btn color="primary" @click="initialize">Reset</v-btn>
             </template>
         </v-data-table>
-        <a class="partysheet" href="https://docs.google.com/spreadsheets/d/1lhdtEqxjbJppjwmtN0CG7L6zn02UqJ8Y13dtB09iAhI/edit#gid=0">Click to edit</a>
-        <p>{{partyppl2}}</p>
-        
+        <button class="btn btn-info" @click="newTab(partysheeturl)">Click to edit in Google Sheets</button>
     </section>
 </div>
 </template>
@@ -341,7 +339,7 @@ import axios from "axios";
 export default {
   name: 'planning',
     data: () => ({
-      partyppl2: [],
+      partypplAPIdata: [],
 
       /*tasks for todo list*/
       tasks: [],
@@ -422,6 +420,7 @@ export default {
       defaultVendor: { name: '', category: '', cost: '', booked: false, notes: '' },
 
       /*partay section*/
+      partysheeturl: "https://docs.google.com/spreadsheets/d/1lhdtEqxjbJppjwmtN0CG7L6zn02UqJ8Y13dtB09iAhI/edit#gid=0",
       partyppl: [],
       partydialog: false,
       partyheaders: [
@@ -469,14 +468,32 @@ export default {
     },
 
     mounted() {
-    axios
+    /*axios
       .get("https://sheetsu.com/apis/v1.0su/eded8760576f")
       .then(response => {
-          this.partyppl2 = response.data;
+          this.partypplAPIdata = response.data;
+          this.addparty();
       })
       .catch(error => {
           console.log('Request failed', error);
-      });
+      });*/
+        let sheetsuParty = "https://sheetsu.com/apis/v1.0su/eded8760576f"
+        let sheetsuBudget = "https://sheetsu.com/apis/v1.0su/de90e9842a02"
+
+        const requestParty = axios.get(sheetsuParty);
+        const requestBudget = axios.get(sheetsuBudget);
+
+        axios.all([requestParty,requestBudget]).then(axios.spread((...responses) => {
+            const responseParty = responses[0].data
+            const responseBudget = responses[1].data
+
+            this.partypplAPIdata = responseParty;
+            this.addparty();
+
+            console.log(responseBudget)
+        })).catch(errors => {
+            console.log('Request failed', errors);
+        })
     },
 
     methods: {
@@ -567,20 +584,22 @@ export default {
                 booked: false,
                 notes: '4 hour session' 
             },
-        ],
-        this.partyppl = [
-            { 
-                lastname: 'Li', 
-                firstname: 'Kevin', 
-                role: 'groom' 
-            },
-            { 
-                lastname: 'Savella', 
-                firstname: 'Chasity', 
-                role: 'bride' 
-            },
         ]
       },
+      newTab(url) {
+        window.open(url, "_blank");
+      },
+
+      addparty() {
+          for (var i = 0; i < this.partypplAPIdata.length; i++) {
+              this.partyppl.push({
+                  lastname: this.partypplAPIdata[i].lastname,
+                  firstname: this.partypplAPIdata[i].firstname,
+                  role: this.partypplAPIdata[i].role
+              })
+          }
+      },
+      
 
     /*task actions*/
       editTask (item) {
@@ -750,4 +769,3 @@ export default {
     padding: 2px;
 }
 </style>
-
