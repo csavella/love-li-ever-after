@@ -115,6 +115,7 @@
                 <v-btn color="primary" @click="initialize">Reset</v-btn>
             </template>
         </v-data-table>
+        <button class="btn btn-info" @click="newTab(tasksheeturl)">Click to edit in Google Sheets</button>
     </section>
     <section id="guests">
         <v-data-table :headers="guestheaders" :items="guests" sort-by="lastname" class="elevation-1">
@@ -344,8 +345,10 @@ export default {
       partypplAPIdata: [],
       budgetAPIdata: [],
       guestsAPIdata: [],
+      tasksAPIdata: [],
 
       /*tasks for todo list*/
+      tasksheeturl: "https://docs.google.com/spreadsheets/d/1Oe7CQ2btK8q0GZOS_P34EaMe83vt6lUvfA8J_AEMw6k/edit#gid=0",
       tasks: [],
       taskdialog: false,
       taskheaders: [
@@ -477,17 +480,20 @@ export default {
         let sheetsuParty = "https://sheetsu.com/apis/v1.0su/eded8760576f"
         let sheetsuBudget = "https://sheetsu.com/apis/v1.0su/de90e9842a02"
         let sheetsuGuests = "https://sheetsu.com/apis/v1.0su/33fd43026ba4"
+        let sheetsuTasks = "https://sheetsu.com/apis/v1.0su/94ecf0a90f73"
 
         const requestParty = axios.get(sheetsuParty);
         const requestBudget = axios.get(sheetsuBudget);
         const requestGuests = axios.get(sheetsuGuests);
+        const requestTasks = axios.get(sheetsuTasks);
 
-        axios.all([requestParty,requestBudget,requestGuests
+        axios.all([requestParty,requestBudget,requestGuests,requestTasks
         ]).then(axios.spread((...responses) => {
 
             const responseParty = responses[0].data
             const responseBudget = responses[1].data
             const responseGuests = responses[2].data
+            const responseTasks = responses[3].data
 
             this.partypplAPIdata = responseParty;
             this.addparty();
@@ -497,6 +503,9 @@ export default {
 
             this.guestAPIdata = responseGuests;
             this.addguests();
+
+            this.tasksAPIdata = responseTasks;
+            this.addtasks();
 
         })).catch(errors => {
             console.log('Request failed', errors);
@@ -541,6 +550,18 @@ export default {
                   confirmed: this.guestAPIdata[i].confirmed,
                   type: this.guestAPIdata[i].type,
                   diet: this.guestAPIdata[i].diet
+              })
+          }
+      },
+
+      addtasks() {
+          for (var i = 0; i < this.tasksAPIdata.length; i++) {
+              this.tasks.push({
+                  todo: this.tasksAPIdata[i].todo,
+                  owner: this.tasksAPIdata[i].owner,
+                  duedate: this.tasksAPIdata[i].duedate,
+                  prio: this.tasksAPIdata[i].prio,
+                  notes: this.tasksAPIdata[i].notes
               })
           }
       },
