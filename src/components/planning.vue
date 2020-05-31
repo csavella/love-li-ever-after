@@ -172,6 +172,7 @@
                 <v-btn color="primary" @click="initialize">Reset</v-btn>
             </template>
         </v-data-table>
+        <button class="btn btn-info" @click="newTab(guestsheeturl)">Click to edit in Google Sheets</button>
     </section>
     <section id="budget">
         <v-data-table :headers="budgetheaders" :items="bitems" sort-by="actualcost" class="elevation-1">
@@ -342,6 +343,7 @@ export default {
     data: () => ({
       partypplAPIdata: [],
       budgetAPIdata: [],
+      guestsAPIdata: [],
 
       /*tasks for todo list*/
       tasks: [],
@@ -364,6 +366,7 @@ export default {
       defaultTask: { todo: '', owner: '', duedate: '', prio: 0, notes: '', },
       
       /*guest section*/
+      guestsheeturl: "https://docs.google.com/spreadsheets/d/1IOUaHB8wW971VsEd2lrSN-rsuqhVMnurU38XFZFWakg/edit#gid=0",
       guests: [],
       guestdialog: false,
       guestheaders: [
@@ -473,19 +476,27 @@ export default {
     mounted() {
         let sheetsuParty = "https://sheetsu.com/apis/v1.0su/eded8760576f"
         let sheetsuBudget = "https://sheetsu.com/apis/v1.0su/de90e9842a02"
+        let sheetsuGuests = "https://sheetsu.com/apis/v1.0su/33fd43026ba4"
 
         const requestParty = axios.get(sheetsuParty);
         const requestBudget = axios.get(sheetsuBudget);
+        const requestGuests = axios.get(sheetsuGuests);
 
-        axios.all([requestParty,requestBudget]).then(axios.spread((...responses) => {
+        axios.all([requestParty,requestBudget,requestGuests
+        ]).then(axios.spread((...responses) => {
+
             const responseParty = responses[0].data
             const responseBudget = responses[1].data
+            const responseGuests = responses[2].data
 
             this.partypplAPIdata = responseParty;
             this.addparty();
 
             this.budgetAPIdata = responseBudget;
             this.addbudget();
+
+            this.guestAPIdata = responseGuests;
+            this.addguests();
 
         })).catch(errors => {
             console.log('Request failed', errors);
@@ -494,93 +505,6 @@ export default {
 
     methods: {
       initialize () {
-        this.tasks = [
-          {
-            todo: 'Insure ring',
-            owner: 'Kevin',
-            duedate: '20/06/01',
-            prio: 5,
-            notes: '',
-          },
-          {
-            todo: 'Create website',
-            owner: 'Chasity',
-            duedate: '20/09/18',
-            prio: 3,
-            notes: 'need database or google doc to keep track of rsvp\'d guests',
-          },
-          {
-            todo: 'Block out hotel rooms for guests',
-            owner: 'Chasity',
-            duedate: '21/01/30',
-            prio: 2,
-            notes: 'Contact Lori about vacation rentals',
-          },
-        ],
-        this.guests = [
-            { 
-                lastname: 'Savella', 
-                firstname: 'Eddie', 
-                email: 'es@gmail.com', 
-                confirmed: true, 
-                type: 'family', 
-                diet: '' 
-            },
-            { 
-                lastname: 'Li', 
-                firstname: 'Quan', 
-                email: 'ql@gmail.com', 
-                confirmed: true, 
-                type: 'family', 
-                diet: '' 
-            },
-        ],
-        /*this.bitems = [
-            { 
-                name: 'venue', 
-                projectedcost: 8000, 
-                actualcost: 10000,
-                booked: true,
-                notes: 'Olowalu Plantation House' 
-            },
-            { 
-                name: 'caterer', 
-                projectedcost: 3000, 
-                actualcost: 0, 
-                booked: false,
-                notes: '' 
-            },
-        ],*/
-        this.vendors = [
-            { 
-                name: 'Olowalu Plantation House', 
-                category: 'venue', 
-                cost: 10000,
-                booked: true,
-                notes: '' 
-            },
-            { 
-                name: 'Tropical Maui Weddings', 
-                category: 'wedding planner', 
-                cost: 5000,
-                booked: true,
-                notes: '' 
-            },
-            {
-                name: 'Leahana Byrd', 
-                category: 'photography', 
-                cost: 2000,
-                booked: false,
-                notes: '2 hour session' 
-            },
-            {
-                name: 'Anna Kim', 
-                category: 'photography', 
-                cost: 3000,
-                booked: false,
-                notes: '4 hour session' 
-            },
-        ]
       },
       newTab(url) {
         window.open(url, "_blank");
@@ -604,6 +528,19 @@ export default {
                   lastname: this.partypplAPIdata[i].lastname,
                   firstname: this.partypplAPIdata[i].firstname,
                   role: this.partypplAPIdata[i].role
+              })
+          }
+      },
+
+      addguests() {
+          for (var i = 0; i < this.guestAPIdata.length; i++) {
+              this.guests.push({
+                  lastname: this.guestAPIdata[i].lastname,
+                  firstname: this.guestAPIdata[i].firstname,
+                  email: this.guestAPIdata[i].email,
+                  confirmed: this.guestAPIdata[i].confirmed,
+                  type: this.guestAPIdata[i].type,
+                  diet: this.guestAPIdata[i].diet
               })
           }
       },
