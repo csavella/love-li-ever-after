@@ -1,21 +1,26 @@
 <template>
     <div id="app">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-items">
-          <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="navbar-collapse collapse" id="navbar-items">
-            <ul class="navbar-nav mx-auto">
-              <li><router-link class="navlink" to="/" data-toggle="collapse" data-target=".navbar-collapse.show">Home</router-link></li>
-              <li><router-link class="navlink" to="/ourstory" data-toggle="collapse" data-target=".navbar-collapse.show">Our Story</router-link></li>
-              <li><router-link class="navlink" to="/details" data-toggle="collapse" data-target=".navbar-collapse.show">Details</router-link></li>
-              <li><router-link class="navlink" to="/planning" data-toggle="collapse" data-target=".navbar-collapse.show">Planning</router-link></li>
-              <li><router-link class="navlink" to="/weddingparty" data-toggle="collapse" data-target=".navbar-collapse.show">Wedding Party</router-link></li>
-              <li><router-link class="navlink" to="/rsvp" data-toggle="collapse" data-target=".navbar-collapse.show">RSVP</router-link></li>
-            </ul>
-          </div>
-      </nav>
-      <router-view :time="times"></router-view>
+      <!--<v-app id="weddingapp">-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" id="scroll-target">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-items">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="navbar-items">
+              <ul class="navbar-nav mx-auto">
+                <li><router-link class="navlink" to="/" data-toggle="collapse" data-target=".navbar-collapse.show">Home</router-link></li>
+                <li><router-link class="navlink" to="/ourstory" data-toggle="collapse" data-target=".navbar-collapse.show">Our Story</router-link></li>
+                <li><router-link class="navlink" to="/details" data-toggle="collapse" data-target=".navbar-collapse.show">Details</router-link></li>
+                <li><router-link class="navlink" to="/planning" data-toggle="collapse" data-target=".navbar-collapse.show">Planning</router-link></li>
+                <li><router-link class="navlink" to="/weddingparty" data-toggle="collapse" data-target=".navbar-collapse.show">Wedding Party</router-link></li>
+                <li><router-link class="navlink" to="/rsvp" data-toggle="collapse" data-target=".navbar-collapse.show">RSVP</router-link></li>
+              </ul>
+            </div>
+        </nav>
+        <router-view :time="times"></router-view>
+        <v-btn v-scroll="onScroll" v-show="fab" fab dark fixed bottom right color="info" @click="toTop">
+          <v-icon>mdi-chevron-up</v-icon>
+        </v-btn>          
+      <!--</v-app>-->
   </div>
 </template>
 
@@ -23,6 +28,7 @@
 export default {
   data() {
     return {
+    fab: false,
     startTime: Date.now(),
     endTime: "Sept 18, 2021 17:00:00",
     times: [
@@ -37,6 +43,14 @@ export default {
     }
   },
   methods: {
+    onScroll (e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset ||   e.target.scrollTop || 0
+      this.fab = top > 20
+    },
+    toTop () {
+      this.$vuetify.goTo(0)
+    },
     updateTimer: function() {
       if (
         this.times[3].time > 0 ||
@@ -103,7 +117,7 @@ export default {
   height: 100vh;
 }
 
-.container {
+.greyblock {
   opacity: 0.7;
 }
 

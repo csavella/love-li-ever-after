@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div class="container">
+    <div class="container greyblock">
       <h1>Kevin &amp; Chastity</h1>
       <h3>September 18, 2021 in Lahaina, HI</h3>
       <section class="flex-container timer">
@@ -30,7 +30,7 @@ export default {
 
 <style>
 
-.container {
+.greyblock {
     background-color: #4e6173;
     color: white;
 }

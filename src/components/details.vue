@@ -1,6 +1,6 @@
 <template>
   <div class="details">
-    <div class="container">
+    <div class="container greyblock">
       <section class="ceremony">
           <h2>Ceremony and Reception</h2>
           SATURDAY, SEPTEMBER 18, 2021<br>

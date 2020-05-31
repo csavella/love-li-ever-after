@@ -1,6 +1,5 @@
 <template>
     <div class="party">
-        <!--<div class="smooth-scroll partyintro d-flex flex-row justify-content-center">-->
         <div class="smooth-scroll partyintro gmcards row">
             <div class="col-sm mb-4 groomsmen">
                 <div class="card gcard">
