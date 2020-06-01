@@ -343,20 +343,29 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   name: 'planning',
+  props: {
+      bitems: {
+          type: Array
+      },
+      partyppl: {
+          type: Array
+      },
+      vendors: {
+          type: Array
+      },
+      tasks: {
+          type: Array
+      },
+      guests: {
+          type: Array
+      }
+  },
     data: () => ({
-      partypplAPIdata: [],
-      budgetAPIdata: [],
-      guestsAPIdata: [],
-      tasksAPIdata: [],
-      vendorsAPIdata: [],
 
       /*tasks for todo list*/
       tasksheeturl: "https://docs.google.com/spreadsheets/d/1Oe7CQ2btK8q0GZOS_P34EaMe83vt6lUvfA8J_AEMw6k/edit#gid=0",
-      tasks: [],
       taskdialog: false,
       taskheaders: [
         {
@@ -377,7 +386,6 @@ export default {
       
       /*guest section*/
       guestsheeturl: "https://docs.google.com/spreadsheets/d/1IOUaHB8wW971VsEd2lrSN-rsuqhVMnurU38XFZFWakg/edit#gid=0",
-      guests: [],
       guestdialog: false,
       guestheaders: [
         {
@@ -398,7 +406,6 @@ export default {
 
       /*budget section*/
       budgetsheeturl: "https://docs.google.com/spreadsheets/d/1eoV8G5XFaQVjuLVnenA1ZxmhuMHRHjl0lUNNifiOcvs/edit#gid=0",
-      bitems: [],
       budgetdialog: false,
       budgetheaders: [
         {
@@ -418,7 +425,6 @@ export default {
 
       /*vendor section*/
       vendorsheeturl: "https://docs.google.com/spreadsheets/d/1tTMz69WH7hiM1fXKWWZwu42C8uHrSKmpn-NxvTmkYDg/edit#gid=0",
-      vendors: [],
       vendordialog: false,
       vendorheaders: [
         {
@@ -438,7 +444,6 @@ export default {
 
       /*partay section*/
       partysheeturl: "https://docs.google.com/spreadsheets/d/1lhdtEqxjbJppjwmtN0CG7L6zn02UqJ8Y13dtB09iAhI/edit#gid=0",
-      partyppl: [],
       partydialog: false,
       partyheaders: [
         {
@@ -484,114 +489,12 @@ export default {
       this.initialize()
     },
 
-    mounted() {
-        let sheetsuParty = "https://sheetsu.com/apis/v1.0su/eded8760576f"
-        let sheetsuBudget = "https://sheetsu.com/apis/v1.0su/de90e9842a02"
-        let sheetsuGuests = "https://sheetsu.com/apis/v1.0su/33fd43026ba4"
-        let sheetsuTasks = "https://sheetsu.com/apis/v1.0su/971084032f1d"
-        let sheetsuVendors = "https://sheetsu.com/apis/v1.0su/02e39cefb1c3"
-
-        const requestParty = axios.get(sheetsuParty);
-        const requestBudget = axios.get(sheetsuBudget);
-        const requestGuests = axios.get(sheetsuGuests);
-        const requestTasks = axios.get(sheetsuTasks);
-        const requestVendors = axios.get(sheetsuVendors);
-
-        axios.all([requestParty,requestBudget,requestGuests,requestTasks,requestVendors
-        ]).then(axios.spread((...responses) => {
-
-            const responseParty = responses[0].data
-            const responseBudget = responses[1].data
-            const responseGuests = responses[2].data
-            const responseTasks = responses[3].data
-            const responseVendors = responses[4].data
-
-            this.partypplAPIdata = responseParty;
-            this.addparty();
-
-            this.budgetAPIdata = responseBudget;
-            this.addbudget();
-
-            this.guestAPIdata = responseGuests;
-            this.addguests();
-
-            this.tasksAPIdata = responseTasks;
-            this.addtasks();
-
-            this.vendorsAPIdata = responseVendors;
-            this.addvendors();
-
-        })).catch(errors => {
-            console.log('Request failed', errors);
-        })
-    },
-
     methods: {
       initialize () {
       },
       newTab(url) {
         window.open(url, "_blank");
       },
-
-      addbudget() {
-        for (var i = 0; i < this.budgetAPIdata.length; i++) {
-              this.bitems.push({
-                  name: this.budgetAPIdata[i].name,
-                  projectedcost: this.budgetAPIdata[i].projectedcost,
-                  actualcost: this.budgetAPIdata[i].actualcost,
-                  booked: this.budgetAPIdata[i].booked,
-                  notes: this.budgetAPIdata[i].notes
-              })
-          }
-      },
-
-      addparty() {
-          for (var i = 0; i < this.partypplAPIdata.length; i++) {
-              this.partyppl.push({
-                  lastname: this.partypplAPIdata[i].lastname,
-                  firstname: this.partypplAPIdata[i].firstname,
-                  role: this.partypplAPIdata[i].role
-              })
-          }
-      },
-
-      addguests() {
-          for (var i = 0; i < this.guestAPIdata.length; i++) {
-              this.guests.push({
-                  lastname: this.guestAPIdata[i].lastname,
-                  firstname: this.guestAPIdata[i].firstname,
-                  email: this.guestAPIdata[i].email,
-                  confirmed: this.guestAPIdata[i].confirmed,
-                  type: this.guestAPIdata[i].type,
-                  diet: this.guestAPIdata[i].diet
-              })
-          }
-      },
-
-      addtasks() {
-          for (var i = 0; i < this.tasksAPIdata.length; i++) {
-              this.tasks.push({
-                  todo: this.tasksAPIdata[i].todo,
-                  owner: this.tasksAPIdata[i].owner,
-                  duedate: this.tasksAPIdata[i].duedate,
-                  prio: this.tasksAPIdata[i].prio,
-                  notes: this.tasksAPIdata[i].notes
-              })
-          }
-      },
-
-      addvendors() {
-          for (var i = 0; i < this.vendorsAPIdata.length; i++) {
-              this.vendors.push({
-                  name: this.vendorsAPIdata[i].name,
-                  category: this.vendorsAPIdata[i].category,
-                  cost: this.vendorsAPIdata[i].cost,
-                  booked: this.vendorsAPIdata[i].booked,
-                  notes: this.vendorsAPIdata[i].notes
-              })
-          }
-      },
-      
 
     /*task actions*/
       editTask (item) {
