@@ -346,21 +346,11 @@
 export default {
   name: 'planning',
   props: {
-      bitems: {
-          type: Array
-      },
-      partyppl: {
-          type: Array
-      },
-      vendors: {
-          type: Array
-      },
-      tasks: {
-          type: Array
-      },
-      guests: {
-          type: Array
-      }
+      bitems: { type: Array },
+      partyppl: { type: Array },
+      vendors: { type: Array },
+      tasks: { type: Array },
+      guests: { type: Array }
   },
     data: () => ({
 
@@ -497,6 +487,53 @@ export default {
       },
 
     /*task actions*/
+      addTaskInSheet(task) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/971084032f1d' })
+        client.create({
+          todo: task.todo,
+          owner: task.owner,
+          duedate: task.duedate,
+          prio: task.prio,
+          notes: task.notes
+        }).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
+      editTaskInSheet(oldtask, newtask) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/971084032f1d' })
+        client.update(
+            "todo",          // column name
+            oldtask.todo,         // value to search for
+            { 
+              todo: newtask.todo, // hash with updates
+              owner: newtask.owner,
+              duedate: newtask.duedate,
+              prio: newtask.prio,
+              notes: newtask.notes
+            } 
+        ).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
+      deleteTaskInSheet(task) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/971084032f1d' })
+        client.delete(
+            "todo",          // column name
+            task.todo        // value to search for
+        ).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
+
       editTask (item) {
         this.editedIndex = this.tasks.indexOf(item)
         this.editedTask = Object.assign({}, item)
@@ -505,7 +542,11 @@ export default {
 
       deleteTask (item) {
         const index = this.tasks.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.tasks.splice(index, 1)
+        var deletetask = confirm('Are you sure you want to delete this item?')
+        if (deletetask) {
+            this.deleteTaskInSheet(this.tasks[index])
+            this.tasks.splice(index, 1)
+        }
       },
 
       closeTask () {
@@ -517,9 +558,12 @@ export default {
       },
 
       saveTask () {
+        //edit existing task
         if (this.editedIndex > -1) {
+          this.editTaskInSheet(this.tasks[this.editedIndex], this.editedTask)
           Object.assign(this.tasks[this.editedIndex], this.editedTask)
-        } else {
+        } else { //add task to table
+          this.addTaskInSheet(this.editedTask)
           this.tasks.push(this.editedTask)
         }
         this.closeTask()

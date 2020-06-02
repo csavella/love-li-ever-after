@@ -147,7 +147,7 @@ export default {
 }
 
 .greyblock {
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 h1, .bmlink, .gmlink {
