@@ -138,6 +138,9 @@
                                 <v-container>
                                     <v-row>
                                         <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="editedGuest.number" label="Number"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="editedGuest.lastname" label="Last Name"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
@@ -379,11 +382,12 @@ export default {
       guestdialog: false,
       guestheaders: [
         {
-          text: 'Last Name',
+          text: 'Number',
           align: 'start',
           sortable: true,
-          value: 'lastname',
+          value: 'number',
         },
+        { text: 'Last Name', value: 'lastname' },
         { text: 'First Name', value: 'firstname' },
         { text: 'Email', value: 'email' },
         { text: 'Confirmed', value: 'confirmed' },
@@ -391,8 +395,8 @@ export default {
         { text: 'Dietary Restrictions', value: 'diet', sortable: false },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
-      editedGuest: { lastname: '', firstname: '', email: '', confirmed: false, type: '', diet: '' },
-      defaultGuest: { lastname: '', firstname: '', email: '', confirmed: false, type: '', diet: '' },
+      editedGuest: { number: 0, lastname: '', firstname: '', email: '', confirmed: false, type: '', diet: '' },
+      defaultGuest: { number: 0, lastname: '', firstname: '', email: '', confirmed: false, type: '', diet: '' },
 
       /*budget section*/
       budgetsheeturl: "https://docs.google.com/spreadsheets/d/1eoV8G5XFaQVjuLVnenA1ZxmhuMHRHjl0lUNNifiOcvs/edit#gid=0",
@@ -570,6 +574,55 @@ export default {
       },
 
       /*guest actions*/
+      addGuestInSheet(guest) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/33fd43026ba4' })
+        client.create({
+          number: guest.number,
+          lastname: guest.lastname,
+          firstname: guest.firstname,
+          email: guest.email,
+          confirmed: guest.confirmed,
+          type: guest.type,
+          diet: guest.diet
+        }).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
+      editGuestInSheet(oldguest, newguest) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/33fd43026ba4' })
+        client.update(
+            "number",          // column name
+            oldguest.number,         // value to search for
+            { 
+              lastname: newguest.lastname, // hash with updates
+              firstname: newguest.firstname,
+              email: newguest.email,
+              confirmed: newguest.confirmed,
+              type: newguest.type,
+              diet: newguest.diet
+            } 
+        ).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
+      deleteGuestInSheet(guest) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/33fd43026ba4' })
+        client.delete(
+            "number",          // column name
+            guest.number        // value to search for
+        ).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
       editGuest (item) {
         this.editedIndex = this.guests.indexOf(item)
         this.editedGuest = Object.assign({}, item)
@@ -578,7 +631,11 @@ export default {
 
       deleteGuest (item) {
         const index = this.guests.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.guests.splice(index, 1)
+        var deleteguest = confirm('Are you sure you want to delete this item?')
+        if (deleteguest) {
+            this.deleteGuestInSheet(this.guests[index])
+            this.guests.splice(index, 1)
+        }
       },
 
       closeGuest () {
@@ -591,8 +648,10 @@ export default {
 
       saveGuest () {
         if (this.editedIndex > -1) {
+          this.editGuestInSheet(this.guests[this.editedIndex], this.editedGuest)
           Object.assign(this.guests[this.editedIndex], this.editedGuest)
         } else {
+          this.addGuestInSheet(this.editedGuest)
           this.guests.push(this.editedGuest)
         }
         this.closeGuest()
