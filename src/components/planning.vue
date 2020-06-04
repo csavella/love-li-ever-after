@@ -144,7 +144,7 @@
                                             <v-text-field v-model="editedGuest.lastname" label="Last Name"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="editedGuest.firstname" label="First name"></v-text-field>
+                                            <v-text-field v-model="editedGuest.firstname" label="First Name"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="editedGuest.email" label="Email"></v-text-field>
@@ -396,8 +396,8 @@ export default {
         { text: 'Actions', value: 'actions', sortable: false },
       ],
       editedGuestIndex: -1,
-      editedGuest: { number: 0, lastname: '', firstname: '', email: '', confirmed: false, type: '', diet: '' },
-      defaultGuest: { number: 0, lastname: '', firstname: '', email: '', confirmed: false, type: '', diet: '' },
+      editedGuest: { number: '', lastname: '', firstname: '', email: '', confirmed: false, type: '', diet: '' },
+      defaultGuest: { number: '', lastname: '', firstname: '', email: '', confirmed: false, type: '', diet: '' },
 
       /*budget section*/
       budgetsheeturl: "https://docs.google.com/spreadsheets/d/1eoV8G5XFaQVjuLVnenA1ZxmhuMHRHjl0lUNNifiOcvs/edit#gid=0",
@@ -614,6 +614,7 @@ export default {
             "number",          // column name
             oldguest.number,         // value to search for
             { 
+              number: newguest.number,
               lastname: newguest.lastname, // hash with updates
               firstname: newguest.firstname,
               email: newguest.email,
@@ -651,7 +652,6 @@ export default {
         if (deleteguest) {
             this.deleteGuestInSheet(this.guests[index])
             this.guests.splice(index, 1)
-            console.log(this.guests)
         }
       },
 
@@ -667,7 +667,7 @@ export default {
         if (this.editedGuestIndex > -1) {
           this.editGuestInSheet(this.guests[this.editedGuestIndex], this.editedGuest)
           Object.assign(this.guests[this.editedGuestIndex], this.editedGuest)
-        } else {
+        } else { 
           this.addGuestInSheet(this.editedGuest)
           this.guests.push(this.editedGuest)
         }
@@ -840,6 +840,48 @@ export default {
 
       
       /*party actions*/
+      addPartyInSheet(person) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/eded8760576f' })
+        client.create({
+          lastname: person.lastname,
+          firstname: person.firstname,
+          role: person.role
+        }).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
+      editPartyInSheet(oldperson, newperson) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/eded8760576f' })
+        client.update(
+            "firstname",          // column name
+            oldperson.firstname,         // value to search for
+            { 
+              lastname: newperson.lastname, // hash with updates
+              firstname: newperson.firstname,
+              role: newperson.role
+            } 
+        ).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
+      deletePartyInSheet(person) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/eded8760576f' })
+        client.delete(
+            "firstname",          // column name
+            person.firstname        // value to search for
+        ).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
       editPerson (item) {
         this.editedPartyIndex = this.partyppl.indexOf(item)
         this.editedPerson = Object.assign({}, item)
@@ -848,7 +890,11 @@ export default {
 
       deletePerson (item) {
         const index = this.partyppl.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.partyppl.splice(index, 1)
+        var deleteperson = confirm('Are you sure you want to delete this item?')
+        if (deleteperson) {
+            this.deletePartyInSheet(this.partyppl[index])
+            this.partyppl.splice(index, 1)
+        }
       },
 
       closePerson () {
@@ -861,8 +907,10 @@ export default {
 
       savePerson () {
         if (this.editedPartyIndex > -1) {
+          this.editPartyInSheet(this.partyppl[this.editedPartyIndex], this.editedPerson)
           Object.assign(this.partyppl[this.editedPartyIndex], this.editedPerson)
         } else {
+          this.addPartyInSheet(this.editedPerson)
           this.partyppl.push(this.editedPerson)
         }
         this.closePerson()
