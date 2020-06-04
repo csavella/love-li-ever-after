@@ -658,6 +658,52 @@ export default {
       },
 
       /*budget actions*/
+      addBitemInSheet(bitem) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/de90e9842a02' })
+        client.create({
+          name: bitem.name,
+          projectedcost: bitem.projectedcost,
+          actualcost: bitem.actualcost,
+          booked: bitem.booked,
+          notes: bitem.notes
+        }).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
+      editBitemInSheet(oldbitem, newbitem) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/de90e9842a02' })
+        client.update(
+            "name",          // column name
+            oldbitem.name,         // value to search for
+            { 
+              name: newbitem.name, // hash with updates
+              projectedcost: newbitem.projectedcost,
+              actualcost: newbitem.actualcost,
+              booked: newbitem.booked,
+              notes: newbitem.notes
+            } 
+        ).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
+      deleteBitemInSheet(bitem) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/de90e9842a02' })
+        client.delete(
+            "name",          // column name
+            bitem.name        // value to search for
+        ).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
       editBitem (item) {
         this.editedIndex = this.bitems.indexOf(item)
         this.editedBitem = Object.assign({}, item)
@@ -666,7 +712,11 @@ export default {
 
       deleteBitem (item) {
         const index = this.bitems.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.bitems.splice(index, 1)
+        var deletebitem = confirm('Are you sure you want to delete this item?')
+        if (deletebitem) {
+            this.deleteBitemInSheet(this.bitems[index])
+            this.bitems.splice(index, 1)
+        }
       },
 
       closeBitem () {
@@ -679,8 +729,10 @@ export default {
 
       saveBitem () {
         if (this.editedIndex > -1) {
+          this.editBitemInSheet(this.bitems[this.editedIndex], this.editedBitem)
           Object.assign(this.bitems[this.editedIndex], this.editedBitem)
         } else {
+          this.addBitemInSheet(this.editedBitem)
           this.bitems.push(this.editedBitem)
         }
         this.closeBitem()
