@@ -76,7 +76,7 @@
                         </template>
                         <v-card>
                             <v-card-title>
-                            <span class="headline">{{ formTitle }}</span>
+                            <span class="headline">{{ formTaskTitle }}</span>
                             </v-card-title>
                             <v-card-text>
                                 <v-container>
@@ -120,7 +120,7 @@
     </section>
     <hr><br><br>
     <section id="guests">
-        <v-data-table :headers="guestheaders" :items="guests" sort-by="lastname" class="elevation-1">
+        <v-data-table :headers="guestheaders" :items="guests" sort-by="number" class="elevation-1">
             <template v-slot:top>
                 <v-toolbar flat color="white">
                     <v-toolbar-title>Guest list</v-toolbar-title>
@@ -132,7 +132,7 @@
                         </template>
                         <v-card>
                             <v-card-title>
-                            <span class="headline">{{ formTitle }}</span>
+                            <span class="headline">{{ formGuestTitle }}</span>
                             </v-card-title>
                             <v-card-text>
                                 <v-container>
@@ -194,7 +194,7 @@
                         </template>
                         <v-card>
                             <v-card-title>
-                            <span class="headline">{{ formTitle }}</span>
+                            <span class="headline">{{ formBudgetTitle }}</span>
                             </v-card-title>
                             <v-card-text>
                                 <v-container>
@@ -250,7 +250,7 @@
                         </template>
                         <v-card>
                             <v-card-title>
-                            <span class="headline">{{ formTitle }}</span>
+                            <span class="headline">{{ formVendorsTitle }}</span>
                             </v-card-title>
                             <v-card-text>
                                 <v-container>
@@ -306,7 +306,7 @@
                         </template>
                         <v-card>
                             <v-card-title>
-                            <span class="headline">{{ formTitle }}</span>
+                            <span class="headline">{{ formPartyTitle }}</span>
                             </v-card-title>
                             <v-card-text>
                                 <v-container>
@@ -373,7 +373,7 @@ export default {
         { text: 'Notes', value: 'notes' , sortable:false },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
-      editedIndex: -1,
+      editedTaskIndex: -1,
       editedTask: { todo: '', owner: '', duedate: '', prio: 0, notes: '', },
       defaultTask: { todo: '', owner: '', duedate: '', prio: 0, notes: '', },
       
@@ -395,6 +395,7 @@ export default {
         { text: 'Dietary Restrictions', value: 'diet', sortable: false },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
+      editedGuestIndex: -1,
       editedGuest: { number: 0, lastname: '', firstname: '', email: '', confirmed: false, type: '', diet: '' },
       defaultGuest: { number: 0, lastname: '', firstname: '', email: '', confirmed: false, type: '', diet: '' },
 
@@ -414,6 +415,7 @@ export default {
         { text: 'Notes', value: 'notes', sortable: false },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
+      editedBudgetIndex: -1,
       editedBitem: { name: '', projectedcost: '', actualcost: '', booked: false, notes: '' },
       defaultBitem: { name: '', projectedcost: '', actualcost: '', booked: false, notes: '' },
 
@@ -433,6 +435,7 @@ export default {
         { text: 'Notes', value: 'notes', sortable: false },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
+      editedVendorIndex: -1,
       editedVendor: { name: '', category: '', cost: '', booked: false, notes: '' },
       defaultVendor: { name: '', category: '', cost: '', booked: false, notes: '' },
 
@@ -450,14 +453,27 @@ export default {
         { text: 'Role', value: 'role' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
+      editedPersonIndex: -1,
       editedPerson: { lastname: '', firstname: '', role: '' },
       defaultPerson: { lastname: '', firstname: '', role: '' },
 
     }),
 
     computed: {
-      formTitle () {
-        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+      formTaskTitle () {
+        return this.editedTaskIndex === -1 ? 'New Item' : 'Edit Item'
+      },
+      formGuestTitle () {
+        return this.editedGuestIndex === -1 ? 'New Item' : 'Edit Item'
+      },
+      formBudgetTitle () {
+        return this.editedBudgetIndex === -1 ? 'New Item' : 'Edit Item'
+      },
+      formPartyTitle () {
+        return this.editedPartyIndex === -1 ? 'New Item' : 'Edit Item'
+      },
+      formVendorsTitle () {
+        return this.editedVendorsIndex === -1 ? 'New Item' : 'Edit Item'
       },
     },
 
@@ -539,7 +555,7 @@ export default {
       },
 
       editTask (item) {
-        this.editedIndex = this.tasks.indexOf(item)
+        this.editedTaskIndex = this.tasks.indexOf(item)
         this.editedTask = Object.assign({}, item)
         this.taskdialog = true
       },
@@ -557,15 +573,15 @@ export default {
         this.taskdialog = false
         this.$nextTick(() => {
           this.editedTask = Object.assign({}, this.defaultTask)
-          this.editedIndex = -1
+          this.editedTaskIndex = -1
         })
       },
 
       saveTask () {
         //edit existing task
-        if (this.editedIndex > -1) {
-          this.editTaskInSheet(this.tasks[this.editedIndex], this.editedTask)
-          Object.assign(this.tasks[this.editedIndex], this.editedTask)
+        if (this.editedTaskIndex > -1) {
+          this.editTaskInSheet(this.tasks[this.editedTaskIndex], this.editedTask)
+          Object.assign(this.tasks[this.editedTaskIndex], this.editedTask)
         } else { //add task to table
           this.addTaskInSheet(this.editedTask)
           this.tasks.push(this.editedTask)
@@ -624,7 +640,7 @@ export default {
         });
       },
       editGuest (item) {
-        this.editedIndex = this.guests.indexOf(item)
+        this.editedGuestIndex = this.guests.indexOf(item)
         this.editedGuest = Object.assign({}, item)
         this.guestdialog = true
       },
@@ -635,6 +651,7 @@ export default {
         if (deleteguest) {
             this.deleteGuestInSheet(this.guests[index])
             this.guests.splice(index, 1)
+            console.log(this.guests)
         }
       },
 
@@ -642,14 +659,14 @@ export default {
         this.guestdialog = false
         this.$nextTick(() => {
           this.editedGuest = Object.assign({}, this.defaultGuest)
-          this.editedIndex = -1
+          this.editedGuestIndex = -1
         })
       },
 
       saveGuest () {
-        if (this.editedIndex > -1) {
-          this.editGuestInSheet(this.guests[this.editedIndex], this.editedGuest)
-          Object.assign(this.guests[this.editedIndex], this.editedGuest)
+        if (this.editedGuestIndex > -1) {
+          this.editGuestInSheet(this.guests[this.editedGuestIndex], this.editedGuest)
+          Object.assign(this.guests[this.editedGuestIndex], this.editedGuest)
         } else {
           this.addGuestInSheet(this.editedGuest)
           this.guests.push(this.editedGuest)
@@ -705,7 +722,7 @@ export default {
         });
       },
       editBitem (item) {
-        this.editedIndex = this.bitems.indexOf(item)
+        this.editedBudgetIndex = this.bitems.indexOf(item)
         this.editedBitem = Object.assign({}, item)
         this.budgetdialog = true
       },
@@ -723,14 +740,14 @@ export default {
         this.budgetdialog = false
         this.$nextTick(() => {
           this.editedBitem = Object.assign({}, this.defaultBitem)
-          this.editedIndex = -1
+          this.editedBudgetIndex = -1
         })
       },
 
       saveBitem () {
-        if (this.editedIndex > -1) {
-          this.editBitemInSheet(this.bitems[this.editedIndex], this.editedBitem)
-          Object.assign(this.bitems[this.editedIndex], this.editedBitem)
+        if (this.editedBudgetIndex > -1) {
+          this.editBitemInSheet(this.bitems[this.editedBudgetIndex], this.editedBitem)
+          Object.assign(this.bitems[this.editedBudgetIndex], this.editedBitem)
         } else {
           this.addBitemInSheet(this.editedBitem)
           this.bitems.push(this.editedBitem)
@@ -739,29 +756,83 @@ export default {
       },
 
       /*vendor actions*/
+      addVendorInSheet(vendor) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/02e39cefb1c3' })
+        client.create({
+          name: vendor.name,
+          category: vendor.category,
+          duedate: vendor.duedate,
+          cost: vendor.cost,
+          booked: vendor.booked,
+          notes: vendor.notes
+        }).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
+      editVendorInSheet(oldvendor, newvendor) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/02e39cefb1c3' })
+        client.update(
+            "name",          // column name
+            oldvendor.name,         // value to search for
+            { 
+              name: newvendor.name, // hash with updates
+              category: newvendor.category,
+              duedate: newvendor.duedate,
+              cost: newvendor.cost,
+              booked: newvendor.booked,
+              notes: newvendor.notes
+            } 
+        ).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
+      deleteVendorInSheet(vendor) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/02e39cefb1c3' })
+        client.delete(
+            "name",          // column name
+            vendor.name        // value to search for
+        ).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
       editVendor (item) {
-        this.editedIndex = this.vendors.indexOf(item)
+        this.editedVendorsIndex = this.vendors.indexOf(item)
         this.editedVendor = Object.assign({}, item)
         this.vendordialog = true
       },
 
       deleteVendor (item) {
         const index = this.vendors.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.vendors.splice(index, 1)
+        var deletevendor = confirm('Are you sure you want to delete this item?')
+        if (deletevendor) {
+            this.deleteVendorInSheet(this.vendors[index])
+            this.vendors.splice(index, 1)
+        }
       },
 
       closeVendor () {
         this.vendordialog = false
         this.$nextTick(() => {
           this.editedVendor = Object.assign({}, this.defaultVendor)
-          this.editedIndex = -1
+          this.editedVendorsIndex = -1
         })
       },
 
       saveVendor () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.vendors[this.editedIndex], this.editedVendor)
+        if (this.editedVendorsIndex > -1) {
+          this.editVendorInSheet(this.vendors[this.editedVendorsIndex], this.editedVendor)
+          Object.assign(this.vendors[this.editedVendorsIndex], this.editedVendor)
         } else {
+          this.addVendorInSheet(this.editedVendor)
           this.vendors.push(this.editedVendor)
         }
         this.closeVendor()
@@ -770,7 +841,7 @@ export default {
       
       /*party actions*/
       editPerson (item) {
-        this.editedIndex = this.partyppl.indexOf(item)
+        this.editedPartyIndex = this.partyppl.indexOf(item)
         this.editedPerson = Object.assign({}, item)
         this.partydialog = true
       },
@@ -784,13 +855,13 @@ export default {
         this.partydialog = false
         this.$nextTick(() => {
           this.editedPerson = Object.assign({}, this.defaultPerson)
-          this.editedIndex = -1
+          this.editedPartyIndex = -1
         })
       },
 
       savePerson () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.partyppl[this.editedIndex], this.editedPerson)
+        if (this.editedPartyIndex > -1) {
+          Object.assign(this.partyppl[this.editedPartyIndex], this.editedPerson)
         } else {
           this.partyppl.push(this.editedPerson)
         }
