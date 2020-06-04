@@ -16,7 +16,7 @@
               </ul>
             </div>
         </nav>
-        <router-view :time="times" :partyppl="partypplAPIdata" :bitems="budgetAPIdata" :vendors="vendorsAPIdata" :tasks="tasksAPIdata" :guests="guestAPIdata"></router-view>
+        <router-view :time="times" :partyppl="partypplAPIdata" :bitems="budgetAPIdata" :vendors="vendorsAPIdata" :tasks="tasksAPIdata" :guestsAPI="guestAPIdata"></router-view>
         <v-btn v-scroll="onScroll" v-show="fab" fab dark fixed bottom right color="info" @click="toTop">
           <v-icon>mdi-chevron-up</v-icon>
         </v-btn>          

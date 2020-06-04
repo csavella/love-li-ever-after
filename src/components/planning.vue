@@ -353,7 +353,7 @@ export default {
       partyppl: { type: Array },
       vendors: { type: Array },
       tasks: { type: Array },
-      guests: { type: Array }
+      guestsAPI: { type: Array }
   },
     data: () => ({
 
@@ -378,6 +378,7 @@ export default {
       defaultTask: { todo: '', owner: '', duedate: '', prio: 0, notes: '', },
       
       /*guest section*/
+      guests: [],
       guestsheeturl: "https://docs.google.com/spreadsheets/d/1IOUaHB8wW971VsEd2lrSN-rsuqhVMnurU38XFZFWakg/edit#gid=0",
       guestdialog: false,
       guestheaders: [
@@ -501,6 +502,7 @@ export default {
 
     methods: {
       initialize () {
+        this.guests = this.guestsAPI;
       },
       newTab(url) {
         window.open(url, "_blank");
