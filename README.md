@@ -5,11 +5,6 @@
 npm install
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
 ### Compiles and minifies for production
 ```
 npm run build
@@ -18,6 +13,16 @@ npm run build
 ### Run after building
 ```
 npm run start
+```
+
+### Test locally
+```
+Open http://localhost:8080/ in browser
+```
+
+### Test deployed web app
+```
+Navigate to http://love-li-ever-after.herokuapp.com/
 ```
 
 ### Lints and fixes files
