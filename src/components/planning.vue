@@ -72,11 +72,11 @@
                     <v-spacer></v-spacer>
                     <v-dialog v-model="taskdialog" max-width="500px">
                         <template v-slot:activator="{ on }">
-                            <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+                            <v-btn color="primary" dark class="mb-2" v-on="on">New Task</v-btn>
                         </template>
                         <v-card>
                             <v-card-title>
-                            <span class="headline">{{ formTitle }}</span>
+                            <span class="headline">{{ formTaskTitle }}</span>
                             </v-card-title>
                             <v-card-text>
                                 <v-container>
@@ -113,14 +113,14 @@
                 <v-icon small @click="deleteTask(item)">mdi-delete</v-icon>
             </template>
             <template v-slot:no-data>
-                <v-btn color="primary" @click="initialize">Reset</v-btn>
+                <v-btn @click="initialize">Reset</v-btn>
             </template>
         </v-data-table>
         <button class="btn btn-info" @click="newTab(tasksheeturl)">Click to edit in Google Sheets</button>
     </section>
     <hr><br><br>
     <section id="guests">
-        <v-data-table :headers="guestheaders" :items="guests" sort-by="lastname" class="elevation-1">
+        <v-data-table :headers="guestheaders" :items="guests" sort-by="number" class="elevation-1">
             <template v-slot:top>
                 <v-toolbar flat color="white">
                     <v-toolbar-title>Guest list</v-toolbar-title>
@@ -128,20 +128,23 @@
                     <v-spacer></v-spacer>
                     <v-dialog v-model="guestdialog" max-width="500px">
                         <template v-slot:activator="{ on }">
-                            <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+                            <v-btn color="primary" dark class="mb-2" v-on="on">New Guest</v-btn>
                         </template>
                         <v-card>
                             <v-card-title>
-                            <span class="headline">{{ formTitle }}</span>
+                            <span class="headline">{{ formGuestTitle }}</span>
                             </v-card-title>
                             <v-card-text>
                                 <v-container>
                                     <v-row>
                                         <v-col cols="12" sm="6" md="4">
+                                            <v-text-field v-model="editedGuest.number" label="Number"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="editedGuest.lastname" label="Last Name"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="editedGuest.firstname" label="First name"></v-text-field>
+                                            <v-text-field v-model="editedGuest.firstname" label="First Name"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="editedGuest.email" label="Email"></v-text-field>
@@ -172,7 +175,7 @@
                 <v-icon small @click="deleteGuest(item)">mdi-delete</v-icon>
             </template>
             <template v-slot:no-data>
-                <v-btn color="primary" @click="initialize">Reset</v-btn>
+                <v-btn @click="initialize">Reset</v-btn>
             </template>
         </v-data-table>
         <button class="btn btn-info" @click="newTab(guestsheeturl)">Click to edit in Google Sheets</button>
@@ -191,7 +194,7 @@
                         </template>
                         <v-card>
                             <v-card-title>
-                            <span class="headline">{{ formTitle }}</span>
+                            <span class="headline">{{ formBudgetTitle }}</span>
                             </v-card-title>
                             <v-card-text>
                                 <v-container>
@@ -228,7 +231,7 @@
                 <v-icon small @click="deleteBitem(item)">mdi-delete</v-icon>
             </template>
             <template v-slot:no-data>
-                <v-btn color="primary" @click="initialize">Reset</v-btn>
+                <v-btn @click="initialize">Reset</v-btn>
             </template>
         </v-data-table>
         <button class="btn btn-info" @click="newTab(budgetsheeturl)">Click to edit in Google Sheets</button>
@@ -243,11 +246,11 @@
                     <v-spacer></v-spacer>
                     <v-dialog v-model="vendordialog" max-width="500px">
                         <template v-slot:activator="{ on }">
-                            <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+                            <v-btn color="primary" dark class="mb-2" v-on="on">New Vendor</v-btn>
                         </template>
                         <v-card>
                             <v-card-title>
-                            <span class="headline">{{ formTitle }}</span>
+                            <span class="headline">{{ formVendorsTitle }}</span>
                             </v-card-title>
                             <v-card-text>
                                 <v-container>
@@ -284,7 +287,7 @@
                 <v-icon small @click="deleteVendor(item)">mdi-delete</v-icon>
             </template>
             <template v-slot:no-data>
-                <v-btn color="primary" @click="initialize">Reset</v-btn>
+                <v-btn @click="initialize">Reset</v-btn>
             </template>
         </v-data-table>
         <button class="btn btn-info" @click="newTab(vendorsheeturl)">Click to edit in Google Sheets</button>
@@ -299,11 +302,11 @@
                     <v-spacer></v-spacer>
                     <v-dialog v-model="partydialog" max-width="500px">
                         <template v-slot:activator="{ on }">
-                            <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+                            <v-btn color="primary" dark class="mb-2" v-on="on">New Person</v-btn>
                         </template>
                         <v-card>
                             <v-card-title>
-                            <span class="headline">{{ formTitle }}</span>
+                            <span class="headline">{{ formPartyTitle }}</span>
                             </v-card-title>
                             <v-card-text>
                                 <v-container>
@@ -334,7 +337,7 @@
                 <v-icon small @click="deletePerson(item)">mdi-delete</v-icon>
             </template>
             <template v-slot:no-data>
-                <v-btn color="primary" @click="initialize">Reset</v-btn>
+                <v-btn @click="initialize">Reset</v-btn>
             </template>
         </v-data-table>
         <button class="btn btn-info" @click="newTab(partysheeturl)">Click to edit in Google Sheets</button>
@@ -350,7 +353,7 @@ export default {
       partyppl: { type: Array },
       vendors: { type: Array },
       tasks: { type: Array },
-      guests: { type: Array }
+      guestsAPI: { type: Array },
   },
     data: () => ({
 
@@ -370,20 +373,22 @@ export default {
         { text: 'Notes', value: 'notes' , sortable:false },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
-      editedIndex: -1,
+      editedTaskIndex: -1,
       editedTask: { todo: '', owner: '', duedate: '', prio: 0, notes: '', },
       defaultTask: { todo: '', owner: '', duedate: '', prio: 0, notes: '', },
       
       /*guest section*/
+      guests: [],
       guestsheeturl: "https://docs.google.com/spreadsheets/d/1IOUaHB8wW971VsEd2lrSN-rsuqhVMnurU38XFZFWakg/edit#gid=0",
       guestdialog: false,
       guestheaders: [
         {
-          text: 'Last Name',
+          text: 'Number',
           align: 'start',
           sortable: true,
-          value: 'lastname',
+          value: 'number',
         },
+        { text: 'Last Name', value: 'lastname' },
         { text: 'First Name', value: 'firstname' },
         { text: 'Email', value: 'email' },
         { text: 'Confirmed', value: 'confirmed' },
@@ -391,8 +396,9 @@ export default {
         { text: 'Dietary Restrictions', value: 'diet', sortable: false },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
-      editedGuest: { lastname: '', firstname: '', email: '', confirmed: false, type: '', diet: '' },
-      defaultGuest: { lastname: '', firstname: '', email: '', confirmed: false, type: '', diet: '' },
+      editedGuestIndex: -1,
+      editedGuest: { number: '', lastname: '', firstname: '', email: '', confirmed: false, type: '', diet: '' },
+      defaultGuest: { number: '', lastname: '', firstname: '', email: '', confirmed: false, type: '', diet: '' },
 
       /*budget section*/
       budgetsheeturl: "https://docs.google.com/spreadsheets/d/1eoV8G5XFaQVjuLVnenA1ZxmhuMHRHjl0lUNNifiOcvs/edit#gid=0",
@@ -410,6 +416,7 @@ export default {
         { text: 'Notes', value: 'notes', sortable: false },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
+      editedBudgetIndex: -1,
       editedBitem: { name: '', projectedcost: '', actualcost: '', booked: false, notes: '' },
       defaultBitem: { name: '', projectedcost: '', actualcost: '', booked: false, notes: '' },
 
@@ -429,6 +436,7 @@ export default {
         { text: 'Notes', value: 'notes', sortable: false },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
+      editedVendorIndex: -1,
       editedVendor: { name: '', category: '', cost: '', booked: false, notes: '' },
       defaultVendor: { name: '', category: '', cost: '', booked: false, notes: '' },
 
@@ -446,14 +454,27 @@ export default {
         { text: 'Role', value: 'role' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
+      editedPersonIndex: -1,
       editedPerson: { lastname: '', firstname: '', role: '' },
       defaultPerson: { lastname: '', firstname: '', role: '' },
 
     }),
 
     computed: {
-      formTitle () {
-        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+      formTaskTitle () {
+        return this.editedTaskIndex === -1 ? 'New Task' : 'Edit Task'
+      },
+      formGuestTitle () {
+        return this.editedGuestIndex === -1 ? 'New Guest' : 'Edit Guest'
+      },
+      formBudgetTitle () {
+        return this.editedBudgetIndex === -1 ? 'New Item' : 'Edit Item'
+      },
+      formPartyTitle () {
+        return this.editedPartyIndex === -1 ? 'New Person' : 'Edit Person'
+      },
+      formVendorsTitle () {
+        return this.editedVendorsIndex === -1 ? 'New Vendor' : 'Edit Vendor'
       },
     },
 
@@ -481,6 +502,7 @@ export default {
 
     methods: {
       initialize () {
+        this.guests = this.guestsAPI;
       },
       newTab(url) {
         window.open(url, "_blank");
@@ -535,7 +557,7 @@ export default {
       },
 
       editTask (item) {
-        this.editedIndex = this.tasks.indexOf(item)
+        this.editedTaskIndex = this.tasks.indexOf(item)
         this.editedTask = Object.assign({}, item)
         this.taskdialog = true
       },
@@ -553,15 +575,15 @@ export default {
         this.taskdialog = false
         this.$nextTick(() => {
           this.editedTask = Object.assign({}, this.defaultTask)
-          this.editedIndex = -1
+          this.editedTaskIndex = -1
         })
       },
 
       saveTask () {
         //edit existing task
-        if (this.editedIndex > -1) {
-          this.editTaskInSheet(this.tasks[this.editedIndex], this.editedTask)
-          Object.assign(this.tasks[this.editedIndex], this.editedTask)
+        if (this.editedTaskIndex > -1) {
+          this.editTaskInSheet(this.tasks[this.editedTaskIndex], this.editedTask)
+          Object.assign(this.tasks[this.editedTaskIndex], this.editedTask)
         } else { //add task to table
           this.addTaskInSheet(this.editedTask)
           this.tasks.push(this.editedTask)
@@ -570,87 +592,249 @@ export default {
       },
 
       /*guest actions*/
+      addGuestInSheet(guest) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/33fd43026ba4' })
+        client.create({
+          number: guest.number,
+          lastname: guest.lastname,
+          firstname: guest.firstname,
+          email: guest.email,
+          confirmed: guest.confirmed,
+          type: guest.type,
+          diet: guest.diet
+        }).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
+      editGuestInSheet(oldguest, newguest) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/33fd43026ba4' })
+        client.update(
+            "number",          // column name
+            oldguest.number,         // value to search for
+            { 
+              number: newguest.number,
+              lastname: newguest.lastname, // hash with updates
+              firstname: newguest.firstname,
+              email: newguest.email,
+              confirmed: newguest.confirmed,
+              type: newguest.type,
+              diet: newguest.diet
+            } 
+        ).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
+      deleteGuestInSheet(guest) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/33fd43026ba4' })
+        client.delete(
+            "number",          // column name
+            guest.number        // value to search for
+        ).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
       editGuest (item) {
-        this.editedIndex = this.guests.indexOf(item)
+        this.editedGuestIndex = this.guests.indexOf(item)
         this.editedGuest = Object.assign({}, item)
         this.guestdialog = true
       },
 
       deleteGuest (item) {
         const index = this.guests.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.guests.splice(index, 1)
+        var deleteguest = confirm('Are you sure you want to delete this item?')
+        if (deleteguest) {
+            this.deleteGuestInSheet(this.guests[index])
+            this.guests.splice(index, 1)
+        }
       },
 
       closeGuest () {
         this.guestdialog = false
         this.$nextTick(() => {
           this.editedGuest = Object.assign({}, this.defaultGuest)
-          this.editedIndex = -1
+          this.editedGuestIndex = -1
         })
       },
 
       saveGuest () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.guests[this.editedIndex], this.editedGuest)
-        } else {
+        if (this.editedGuestIndex > -1) {
+          this.editGuestInSheet(this.guests[this.editedGuestIndex], this.editedGuest)
+          Object.assign(this.guests[this.editedGuestIndex], this.editedGuest)
+        } else { 
+          this.addGuestInSheet(this.editedGuest)
           this.guests.push(this.editedGuest)
         }
         this.closeGuest()
       },
 
       /*budget actions*/
+      addBitemInSheet(bitem) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/de90e9842a02' })
+        client.create({
+          name: bitem.name,
+          projectedcost: bitem.projectedcost,
+          actualcost: bitem.actualcost,
+          booked: bitem.booked,
+          notes: bitem.notes
+        }).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
+      editBitemInSheet(oldbitem, newbitem) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/de90e9842a02' })
+        client.update(
+            "name",          // column name
+            oldbitem.name,         // value to search for
+            { 
+              name: newbitem.name, // hash with updates
+              projectedcost: newbitem.projectedcost,
+              actualcost: newbitem.actualcost,
+              booked: newbitem.booked,
+              notes: newbitem.notes
+            } 
+        ).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
+      deleteBitemInSheet(bitem) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/de90e9842a02' })
+        client.delete(
+            "name",          // column name
+            bitem.name        // value to search for
+        ).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
       editBitem (item) {
-        this.editedIndex = this.bitems.indexOf(item)
+        this.editedBudgetIndex = this.bitems.indexOf(item)
         this.editedBitem = Object.assign({}, item)
         this.budgetdialog = true
       },
 
       deleteBitem (item) {
         const index = this.bitems.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.bitems.splice(index, 1)
+        var deletebitem = confirm('Are you sure you want to delete this item?')
+        if (deletebitem) {
+            this.deleteBitemInSheet(this.bitems[index])
+            this.bitems.splice(index, 1)
+        }
       },
 
       closeBitem () {
         this.budgetdialog = false
         this.$nextTick(() => {
           this.editedBitem = Object.assign({}, this.defaultBitem)
-          this.editedIndex = -1
+          this.editedBudgetIndex = -1
         })
       },
 
       saveBitem () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.bitems[this.editedIndex], this.editedBitem)
+        if (this.editedBudgetIndex > -1) {
+          this.editBitemInSheet(this.bitems[this.editedBudgetIndex], this.editedBitem)
+          Object.assign(this.bitems[this.editedBudgetIndex], this.editedBitem)
         } else {
+          this.addBitemInSheet(this.editedBitem)
           this.bitems.push(this.editedBitem)
         }
         this.closeBitem()
       },
 
       /*vendor actions*/
+      addVendorInSheet(vendor) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/02e39cefb1c3' })
+        client.create({
+          name: vendor.name,
+          category: vendor.category,
+          duedate: vendor.duedate,
+          cost: vendor.cost,
+          booked: vendor.booked,
+          notes: vendor.notes
+        }).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
+      editVendorInSheet(oldvendor, newvendor) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/02e39cefb1c3' })
+        client.update(
+            "name",          // column name
+            oldvendor.name,         // value to search for
+            { 
+              name: newvendor.name, // hash with updates
+              category: newvendor.category,
+              duedate: newvendor.duedate,
+              cost: newvendor.cost,
+              booked: newvendor.booked,
+              notes: newvendor.notes
+            } 
+        ).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
+      deleteVendorInSheet(vendor) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/02e39cefb1c3' })
+        client.delete(
+            "name",          // column name
+            vendor.name        // value to search for
+        ).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
       editVendor (item) {
-        this.editedIndex = this.vendors.indexOf(item)
+        this.editedVendorsIndex = this.vendors.indexOf(item)
         this.editedVendor = Object.assign({}, item)
         this.vendordialog = true
       },
 
       deleteVendor (item) {
         const index = this.vendors.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.vendors.splice(index, 1)
+        var deletevendor = confirm('Are you sure you want to delete this item?')
+        if (deletevendor) {
+            this.deleteVendorInSheet(this.vendors[index])
+            this.vendors.splice(index, 1)
+        }
       },
 
       closeVendor () {
         this.vendordialog = false
         this.$nextTick(() => {
           this.editedVendor = Object.assign({}, this.defaultVendor)
-          this.editedIndex = -1
+          this.editedVendorsIndex = -1
         })
       },
 
       saveVendor () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.vendors[this.editedIndex], this.editedVendor)
+        if (this.editedVendorsIndex > -1) {
+          this.editVendorInSheet(this.vendors[this.editedVendorsIndex], this.editedVendor)
+          Object.assign(this.vendors[this.editedVendorsIndex], this.editedVendor)
         } else {
+          this.addVendorInSheet(this.editedVendor)
           this.vendors.push(this.editedVendor)
         }
         this.closeVendor()
@@ -658,29 +842,77 @@ export default {
 
       
       /*party actions*/
+      addPartyInSheet(person) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/eded8760576f' })
+        client.create({
+          lastname: person.lastname,
+          firstname: person.firstname,
+          role: person.role
+        }).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
+      editPartyInSheet(oldperson, newperson) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/eded8760576f' })
+        client.update(
+            "firstname",          // column name
+            oldperson.firstname,         // value to search for
+            { 
+              lastname: newperson.lastname, // hash with updates
+              firstname: newperson.firstname,
+              role: newperson.role
+            } 
+        ).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
+      deletePartyInSheet(person) {
+        var sheetsu = require('sheetsu-node')
+        var client = sheetsu({ address: 'https://sheetsu.com/apis/v1.0su/eded8760576f' })
+        client.delete(
+            "firstname",          // column name
+            person.firstname        // value to search for
+        ).then(function(data) {
+            console.log(data);
+        }, function(err){
+            console.log(err);
+        });
+      },
       editPerson (item) {
-        this.editedIndex = this.partyppl.indexOf(item)
+        this.editedPartyIndex = this.partyppl.indexOf(item)
         this.editedPerson = Object.assign({}, item)
         this.partydialog = true
       },
 
       deletePerson (item) {
         const index = this.partyppl.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.partyppl.splice(index, 1)
+        var deleteperson = confirm('Are you sure you want to delete this item?')
+        if (deleteperson) {
+            this.deletePartyInSheet(this.partyppl[index])
+            this.partyppl.splice(index, 1)
+        }
       },
 
       closePerson () {
         this.partydialog = false
         this.$nextTick(() => {
           this.editedPerson = Object.assign({}, this.defaultPerson)
-          this.editedIndex = -1
+          this.editedPartyIndex = -1
         })
       },
 
       savePerson () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.partyppl[this.editedIndex], this.editedPerson)
+        if (this.editedPartyIndex > -1) {
+          this.editPartyInSheet(this.partyppl[this.editedPartyIndex], this.editedPerson)
+          Object.assign(this.partyppl[this.editedPartyIndex], this.editedPerson)
         } else {
+          this.addPartyInSheet(this.editedPerson)
           this.partyppl.push(this.editedPerson)
         }
         this.closePerson()

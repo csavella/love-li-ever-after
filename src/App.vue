@@ -1,6 +1,7 @@
 <template>
     <div id="app">
-      <!--<v-app id="weddingapp">-->
+      <!-- NOT SURE IF THIS TAG IS NECESSARY. LEAVING COMMENTED JUST IN CASE
+      <v-app id="weddingapp">-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" id="scroll-target">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-items">
             <span class="navbar-toggler-icon"></span>
@@ -16,7 +17,7 @@
               </ul>
             </div>
         </nav>
-        <router-view :time="times" :partyppl="partypplAPIdata" :bitems="budgetAPIdata" :vendors="vendorsAPIdata" :tasks="tasksAPIdata" :guests="guestAPIdata"></router-view>
+        <router-view :time="times" :partyppl="partypplAPIdata" :bitems="budgetAPIdata" :vendors="vendorsAPIdata" :tasks="tasksAPIdata" :guestsAPI="guestAPIdata"></router-view>
         <v-btn v-scroll="onScroll" v-show="fab" fab dark fixed bottom right color="info" @click="toTop">
           <v-icon>mdi-chevron-up</v-icon>
         </v-btn>          
