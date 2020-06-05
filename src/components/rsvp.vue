@@ -6,15 +6,12 @@
             <form>
                 <h2 class="formtitle">RSVP Form</h2>
                 <div class="form-group fname">
-                    <!--<label for="firstname">First name</label>-->
                     <input id="firstname" name="firstname" class="form-control" placeholder="First Name" required v-model="firstname"/>
                 </div>
                 <div class="form-group lname">
-                    <!--<label for="lastname">Last name</label>-->
                     <input id="lastname" name="lastname" class="form-control" placeholder="Last Name" required v-model="lastname"/>
                 </div>
                 <div class="form-group emailaddress">
-                    <!--<label for="emailaddress">Email address</label>-->
                     <input type="email" class="form-control" id="emailaddress" name="emailaddress" placeholder="Email" required aria-describedby="emailHelp" v-model="email">
                 </div>
                 <div class="form-group">

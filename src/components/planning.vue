@@ -72,7 +72,7 @@
                     <v-spacer></v-spacer>
                     <v-dialog v-model="taskdialog" max-width="500px">
                         <template v-slot:activator="{ on }">
-                            <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+                            <v-btn color="primary" dark class="mb-2" v-on="on">New Task</v-btn>
                         </template>
                         <v-card>
                             <v-card-title>
@@ -113,7 +113,7 @@
                 <v-icon small @click="deleteTask(item)">mdi-delete</v-icon>
             </template>
             <template v-slot:no-data>
-                <v-btn color="primary" @click="initialize">Reset</v-btn>
+                <v-btn @click="initialize">Reset</v-btn>
             </template>
         </v-data-table>
         <button class="btn btn-info" @click="newTab(tasksheeturl)">Click to edit in Google Sheets</button>
@@ -128,7 +128,7 @@
                     <v-spacer></v-spacer>
                     <v-dialog v-model="guestdialog" max-width="500px">
                         <template v-slot:activator="{ on }">
-                            <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+                            <v-btn color="primary" dark class="mb-2" v-on="on">New Guest</v-btn>
                         </template>
                         <v-card>
                             <v-card-title>
@@ -175,7 +175,7 @@
                 <v-icon small @click="deleteGuest(item)">mdi-delete</v-icon>
             </template>
             <template v-slot:no-data>
-                <v-btn color="primary" @click="initialize">Reset</v-btn>
+                <v-btn @click="initialize">Reset</v-btn>
             </template>
         </v-data-table>
         <button class="btn btn-info" @click="newTab(guestsheeturl)">Click to edit in Google Sheets</button>
@@ -231,7 +231,7 @@
                 <v-icon small @click="deleteBitem(item)">mdi-delete</v-icon>
             </template>
             <template v-slot:no-data>
-                <v-btn color="primary" @click="initialize">Reset</v-btn>
+                <v-btn @click="initialize">Reset</v-btn>
             </template>
         </v-data-table>
         <button class="btn btn-info" @click="newTab(budgetsheeturl)">Click to edit in Google Sheets</button>
@@ -246,7 +246,7 @@
                     <v-spacer></v-spacer>
                     <v-dialog v-model="vendordialog" max-width="500px">
                         <template v-slot:activator="{ on }">
-                            <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+                            <v-btn color="primary" dark class="mb-2" v-on="on">New Vendor</v-btn>
                         </template>
                         <v-card>
                             <v-card-title>
@@ -287,7 +287,7 @@
                 <v-icon small @click="deleteVendor(item)">mdi-delete</v-icon>
             </template>
             <template v-slot:no-data>
-                <v-btn color="primary" @click="initialize">Reset</v-btn>
+                <v-btn @click="initialize">Reset</v-btn>
             </template>
         </v-data-table>
         <button class="btn btn-info" @click="newTab(vendorsheeturl)">Click to edit in Google Sheets</button>
@@ -302,7 +302,7 @@
                     <v-spacer></v-spacer>
                     <v-dialog v-model="partydialog" max-width="500px">
                         <template v-slot:activator="{ on }">
-                            <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+                            <v-btn color="primary" dark class="mb-2" v-on="on">New Person</v-btn>
                         </template>
                         <v-card>
                             <v-card-title>
@@ -337,7 +337,7 @@
                 <v-icon small @click="deletePerson(item)">mdi-delete</v-icon>
             </template>
             <template v-slot:no-data>
-                <v-btn color="primary" @click="initialize">Reset</v-btn>
+                <v-btn @click="initialize">Reset</v-btn>
             </template>
         </v-data-table>
         <button class="btn btn-info" @click="newTab(partysheeturl)">Click to edit in Google Sheets</button>
@@ -353,7 +353,7 @@ export default {
       partyppl: { type: Array },
       vendors: { type: Array },
       tasks: { type: Array },
-      guestsAPI: { type: Array }
+      guestsAPI: { type: Array },
   },
     data: () => ({
 
@@ -462,19 +462,19 @@ export default {
 
     computed: {
       formTaskTitle () {
-        return this.editedTaskIndex === -1 ? 'New Item' : 'Edit Item'
+        return this.editedTaskIndex === -1 ? 'New Task' : 'Edit Task'
       },
       formGuestTitle () {
-        return this.editedGuestIndex === -1 ? 'New Item' : 'Edit Item'
+        return this.editedGuestIndex === -1 ? 'New Guest' : 'Edit Guest'
       },
       formBudgetTitle () {
         return this.editedBudgetIndex === -1 ? 'New Item' : 'Edit Item'
       },
       formPartyTitle () {
-        return this.editedPartyIndex === -1 ? 'New Item' : 'Edit Item'
+        return this.editedPartyIndex === -1 ? 'New Person' : 'Edit Person'
       },
       formVendorsTitle () {
-        return this.editedVendorsIndex === -1 ? 'New Item' : 'Edit Item'
+        return this.editedVendorsIndex === -1 ? 'New Vendor' : 'Edit Vendor'
       },
     },
 

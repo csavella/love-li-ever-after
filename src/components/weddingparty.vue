@@ -103,8 +103,6 @@
                     </div>
                 </div>
             </div>
-        <!--</section>
-        <section id="bridesmaids">-->
             <div id="bridesmaids" class="gmcards row row-cols-1 row-cols-md-2 row-cols-lg-3">
                 <div class="col mb-4">
                     <div class="card">

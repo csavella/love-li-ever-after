@@ -80,17 +80,14 @@
                 <img class="img-fluid" src="@/assets/ourstory7.jpg" alt="Card image cap">
             </div>
             <div class="mb-3 pics animation all 1">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
-            do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco 
-            laboris nisi ut aliquip ex ea commodo consequat. Duis aute 
-            irure dolor in reprehenderit in voluptate velit esse cillum 
-            dolore eu fugiat nulla pariatur. Excepteur sint occaecat 
-            cupidatat non proident, sunt in culpa qui officia deserunt 
-            mollit anim id est laborum. nderit in voluptate velit esse cillum 
-            dolore eu fugiat nulla pariatur. Excepteur sint occaecat 
-            cupidatat non proident, sunt in culpa qui officia deserunt 
-            mollit anim id est laborum. </p>
+                <h3>How we met...</h3>
+                <p>One day during lunch, Chasity saw a friend walking with Kevin and stopped 
+                    to chat with her. Kevin introduced himself and they exchanged a few words 
+                    before going their separate ways. After lunch, they got back to their desks 
+                    and IMed each other at the same time. They grabbed tea later that day and 
+                    quickly became close friends. Despite the suspicion going around their 
+                    friend group, Chasity and Kevin really were just friends for 3 months 
+                    before they went on their first date.</p>
             </div>
             <div class="mb-3 pics animation all 1">
                 <img class="img-fluid" src="@/assets/ourstory8.jpg" alt="Card image cap">

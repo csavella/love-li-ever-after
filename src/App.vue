@@ -1,6 +1,7 @@
 <template>
     <div id="app">
-      <!--<v-app id="weddingapp">-->
+      <!-- NOT SURE IF THIS TAG IS NECESSARY. LEAVING COMMENTED JUST IN CASE
+      <v-app id="weddingapp">-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" id="scroll-target">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-items">
             <span class="navbar-toggler-icon"></span>
