@@ -216,7 +216,7 @@
     width: 100%;
     height: 90vh;
     margin: auto;
-    padding: 10px;
+    padding: 30px;
 }
 
 /*wedding party individual cards*/

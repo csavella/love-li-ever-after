@@ -922,6 +922,10 @@ export default {
 </script>
 
 <style>
+.planning {
+  padding-top: 100px;
+}
+
 .planningtopic1, .planningtopic2, .planningtopic3, .planningtopic4 {
     color: maroon;
 }

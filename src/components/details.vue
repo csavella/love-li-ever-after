@@ -27,9 +27,10 @@ export default {
 
 <style>
 .ceremony{
-    padding: 50px;
+    padding: 100px;
 }
 button {
-    padding: 10px;
+    padding: 20px;
+    opacity: 0.6;
 }
 </style>

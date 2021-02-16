@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="container greyblock">
-      <h1>Kevin &amp; Chasity</h1>
+      <h1>Kevin &amp; Chastity</h1>
       <h3>September 18, 2021 in Lahaina, HI</h3>
       <section class="flex-container timer">
           <div class="flex-item number">{{ time[0].time }}</div>
@@ -29,9 +29,7 @@ export default {
 </script>
 
 <style>
-
 .greyblock {
-    background-color: #4e6173;
     color: white;
 }
 h1 {
@@ -58,7 +56,6 @@ h3 {
     font-size: 1.3em;
 }
 .number {
-    background-color: #4e6173;
     box-sizing: border-box;
     border-radius: 5px;
     font-size: 2em;

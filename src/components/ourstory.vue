@@ -81,7 +81,7 @@
             </div>
             <div class="mb-3 pics animation all 1">
                 <h3>How we met...</h3>
-                <p>One day during lunch, Chasity saw a friend walking with Kevin and stopped 
+                <p>One day during lunch, Chastity saw a friend walking with Kevin and stopped 
                     to chat with her. Kevin introduced himself and they exchanged a few words 
                     before going their separate ways. After lunch, they got back to their desks 
                     and IMed each other at the same time. They grabbed tea later that day and 

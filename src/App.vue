@@ -2,16 +2,16 @@
     <div id="app">
       <!-- NOT SURE IF THIS TAG IS NECESSARY. LEAVING COMMENTED JUST IN CASE
       <v-app id="weddingapp">-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation" id="scroll-target">
+        <nav class="navbar navbar-expand-lg navbar-dark scrolling-navbar bg-dark" role="navigation" id="scroll-target">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-items">
-            <span class="navbar-toggler-icon"></span>
+              <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse collapse" id="navbar-items">
               <ul class="navbar-nav mx-auto">
                 <li><router-link class="navlink" to="/" data-toggle="collapse" data-target=".navbar-collapse.show">Home</router-link></li>
-                <li><router-link class="navlink" to="/ourstory" data-toggle="collapse" data-target=".navbar-collapse.show">Our Story</router-link></li>
+                <!--<li><router-link class="navlink" to="/ourstory" data-toggle="collapse" data-target=".navbar-collapse.show">Our Story</router-link></li>-->
                 <li><router-link class="navlink" to="/details" data-toggle="collapse" data-target=".navbar-collapse.show">Details</router-link></li>
-                <li><router-link class="navlink" to="/planning" data-toggle="collapse" data-target=".navbar-collapse.show">Planning</router-link></li>
+                <!--<li><router-link class="navlink" to="/planning" data-toggle="collapse" data-target=".navbar-collapse.show">Planning</router-link></li>-->
                 <li><router-link class="navlink" to="/weddingparty" data-toggle="collapse" data-target=".navbar-collapse.show">Wedding Party</router-link></li>
                 <li><router-link class="navlink" to="/rsvp" data-toggle="collapse" data-target=".navbar-collapse.show">RSVP</router-link></li>
               </ul>
@@ -38,7 +38,7 @@ export default {
 
     fab: false,
     startTime: Date.now(),
-    endTime: "Sept 18, 2021 17:00:00",
+    endTime: "Sept 18, 2021 16:30:00",
     times: [
       { id: 0, text: "Days", time: 1 },
       { id: 1, text: "Hours", time: 1 },
@@ -137,7 +137,8 @@ export default {
 }
 
 .main, .details, .rsvp {
-  background-image: url("https://i.imgur.com/8k6qUXq.jpg");
+  /*background: linear-gradient(0deg, #ffffff 0%, #ffffff 90%, #545454 100%);*/
+  background-image: url("assets/012421candk016.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -147,15 +148,15 @@ export default {
   height: 100vh;
 }
 
-.greyblock {
-  opacity: 0.8;
-}
-
 h1, .bmlink, .gmlink {
   font-family: 'Great Vibes', Avenir, Helvetica, Arial, sans-serif;
 }
 
 /*navigation bar*/
+.navbar {
+  opacity: 0.5;
+}
+
 li {
     display: inline-flex;
     padding: 5px 30px 5px 30px;
@@ -164,14 +165,14 @@ li {
 
 .navlink {
     text-decoration: none;
-    font-size: 1.5em;
+    font-size: 1em;
     font-weight: bolder;
-    color: #8e3155;
+    color: #ffffff;
 }
 
 .navlink:hover, .navlink:focus, .navlink:active {
-    color: #4e6173;
-    text-decoration: none;
+    color: #ffffff;
+    text-decoration: underline;
 }
 
 .gcard:hover {

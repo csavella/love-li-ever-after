@@ -138,7 +138,7 @@ export default {
     background-color: lightgrey;
     padding-top: 20px;
     margin: auto;
-    opacity: 0.95;
+    opacity: 0.8;
     border-radius: 5px;
 }
 .fname, .lname, .emailaddress {
