@@ -4,7 +4,7 @@
       <section class="ceremony">
           <h2>Ceremony and Reception</h2>
           SATURDAY, SEPTEMBER 18, 2021<br>
-          5:00 - 10:00 PM<br>
+          4:30 - 10:00 PM<br>
           <h3>Olowalu Plantation House</h3>
           810 Olowalu Village Road<br>
           Lahaina, Hawaii 96761<br>
