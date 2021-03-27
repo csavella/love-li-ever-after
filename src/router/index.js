@@ -6,6 +6,7 @@ import ourstory from '@/components/ourstory'
 import planning from '@/components/planning'
 import rsvp from '@/components/rsvp'
 import weddingparty from '@/components/weddingparty'
+import travel from '@/components/travel'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/planning',
       name: 'planning',
       component: planning
+    },
+    {
+      path: '/travel',
+      name: 'travel',
+      component: travel
     }
   ]
 })
