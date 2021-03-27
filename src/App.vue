@@ -136,8 +136,32 @@ export default {
   color: #2c3e50;
 }
 
-.main, .details, .rsvp {
-  /*background: linear-gradient(0deg, #ffffff 0%, #ffffff 90%, #545454 100%);*/
+/*.main,*/.names {
+  background-image: 
+  linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 1%, transparent),
+  url("assets/012421candk016.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #c6dbf1;
+  width: 100vw;
+  height: 80vh;
+}
+
+.main2{
+  background-image: 
+  linear-gradient(0.25turn, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.73)),
+  url("assets/012421candk042.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  /*background-attachment: fixed;*/
+  background-size: cover;
+  background-color: #c6dbf1;
+  width: 100vw;
+}
+
+.details, .rsvp {
   background-image: url("assets/012421candk016.jpg");
   background-position: center center;
   background-repeat: no-repeat;
@@ -148,7 +172,7 @@ export default {
   height: 100vh;
 }
 
-h1, .bmlink, .gmlink {
+h1, .bmlink, .gmlink, .announcement {
   font-family: 'Great Vibes', Avenir, Helvetica, Arial, sans-serif;
 }
 
@@ -175,6 +199,7 @@ li {
     text-decoration: underline;
 }
 
+/*wedding party cards*/
 .gcard:hover {
   background-image: url("https://i.imgur.com/Uur66PW.jpg");
   background-position: center center;
