@@ -163,6 +163,19 @@ export default {
   height: 70vh;
 }
 
+/*media queries*/
+@media (max-width:600px) {
+  .names, .main2 {
+      background-attachment: scroll;
+  }
+}
+
+@media (max-width:576px) {
+    .names, .main2 {
+        background-attachment: scroll;
+    }
+}
+
 .details {
   background-image: 
   linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 10%, transparent),
