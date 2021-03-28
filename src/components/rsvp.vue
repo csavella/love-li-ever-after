@@ -4,7 +4,7 @@
         <div class="col">
             <div class="col-md-auto">
             <form>
-                <h2 class="formtitle">RSVP Form</h2>
+                <h2 class="formtitle">Répondez s'il vous plaît</h2>
                 <div class="form-group fname">
                     <input id="firstname" name="firstname" class="form-control" placeholder="First Name" required v-model="firstname"/>
                 </div>
@@ -14,8 +14,8 @@
                 <div class="form-group emailaddress">
                     <input type="email" class="form-control" id="emailaddress" name="emailaddress" placeholder="Email" required aria-describedby="emailHelp" v-model="email">
                 </div>
-                <div class="form-group">
-                    <label class="response">Response:</label>
+                <div class="form-group response">
+                    <label class="acceptresponse">Response:</label>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="optradio" id="accept" value="true" required v-model="confirmed">
                         <label class="form-check-label" for="accept">Delightfully accepts</label>
@@ -25,8 +25,8 @@
                         <label class="form-check-label" for="decline">Regretfully declines</label>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="response">Dietary Requirements:</label>
+                <div class="form-group diet">
+                    <label class="dietresponse">Dietary Requirements:</label>
                     <br>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" id="vegetarian" value="vegetarian" v-model="allergies">
@@ -140,15 +140,16 @@ export default {
 <style>
 .rsvpform {
     width: 30%;
-    background-color: lightgrey;
-    padding-top: 20px;
+    background-color: none;
+    padding-top: 30px;
     margin: auto;
-    opacity: 0.8;
     border-radius: 5px;
 }
+
 .fname, .lname, .emailaddress {
     text-align: left;
 }
+
 .rsvpsubmit {
     background-color: maroon;
     margin-bottom: 20px;
@@ -157,9 +158,13 @@ export default {
 label {
     font-weight: bold;
 }
-.response {
+.acceptresponse, .dietresponse {
     font-size: 1.2em;
     padding-top: 5px;
+}
+
+.formtitle, .acceptresponse, .dietresponse, .response, .diet {
+    color: white;
 }
 
 @media (max-width: 600px) {

@@ -165,13 +165,13 @@ export default {
 
 /*media queries*/
 @media (max-width:600px) {
-  .names, .main2 {
+  .names, .main2, .rsvp {
       background-attachment: scroll;
   }
 }
 
 @media (max-width:576px) {
-    .names, .main2 {
+    .names, .main2, .rsvp {
         background-attachment: scroll;
     }
 }
@@ -190,7 +190,8 @@ export default {
 }
 
 .rsvp {
-  background-image: url("assets/012421candk016.jpg");
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 10%, transparent),
+  url("assets/012421candk071.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -200,7 +201,7 @@ export default {
   height: 100vh;
 }
 
-h1, .bmlink, .gmlink, .announcement {
+h1, .bmlink, .gmlink, .announcement, .formtitle {
   font-family: 'Great Vibes', Avenir, Helvetica, Arial, sans-serif;
 }
 

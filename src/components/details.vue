@@ -30,11 +30,11 @@
         </div>
       </div>
     </div>
-    <footer class="footer">
+    <!--<footer class="footer">
       <div class="container">
         <span class="text-muted">&#169;2021. Designed and coded by Chastity Savella.</span>
       </div>
-    </footer>
+    </footer>-->
   </div>
 </template>
 
