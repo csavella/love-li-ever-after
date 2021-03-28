@@ -137,7 +137,7 @@ export default {
   color: #2c3e50;
 }
 
-/*.main,*/.names {
+.names {
   background-image: 
   linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 1%, transparent),
   url("assets/012421candk016.jpg");
@@ -156,14 +156,27 @@ export default {
   url("assets/012421candk042.jpg");
   background-position: center center;
   background-repeat: no-repeat;
-  /*background-attachment: fixed;*/
+  background-attachment: fixed;
   background-size: cover;
   background-color: #c6dbf1;
   width: 100vw;
   height: 70vh;
 }
 
-.details, .rsvp {
+.details {
+  background-image: 
+  linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 10%, transparent),
+  url("https://images.pexels.com/photos/269583/pexels-photo-269583.jpeg?cs=srgb&dl=pexels-pixabay-269583.jpg&fm=jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #c6dbf1;
+  width: 100vw;
+  height: 80vh;
+}
+
+.rsvp {
   background-image: url("assets/012421candk016.jpg");
   background-position: center center;
   background-repeat: no-repeat;
