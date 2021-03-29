@@ -165,13 +165,13 @@ export default {
 
 /*media queries*/
 @media (max-width:600px) {
-  .names, .main2, .rsvp, .travel, .submitted {
+  .names, .main2, .rsvp, .submitted {
       background-attachment: scroll;
   }
 }
 
 @media (max-width:576px) {
-    .names, .main2, .rsvp, .travel, .submitted {
+    .names, .main2, .rsvp, .submitted {
         background-attachment: scroll;
     }
 }
