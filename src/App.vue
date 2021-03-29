@@ -176,7 +176,7 @@ export default {
     }
 }
 
-.details {
+.details, .travel {
   background-image: 
   linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 10%, transparent),
   url("https://images.pexels.com/photos/269583/pexels-photo-269583.jpeg?cs=srgb&dl=pexels-pixabay-269583.jpg&fm=jpg");
@@ -201,7 +201,7 @@ export default {
   height: 100vh;
 }
 
-h1, .bmlink, .gmlink, .announcement, .formtitle {
+h1, .bmlink, .gmlink, .announcement, .formtitle, .traveltitle {
   font-family: 'Great Vibes', Avenir, Helvetica, Arial, sans-serif;
 }
 
