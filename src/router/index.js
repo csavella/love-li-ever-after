@@ -4,6 +4,7 @@ import details from '@/components/details'
 import main from '@/components/main'
 import rsvp from '@/components/rsvp'
 import travel from '@/components/travel'
+import submitted from '@/components/submitted'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/travel',
       name: 'travel',
       component: travel
+    },
+    {
+      path: '/submitted',
+      name: 'submitted',
+      component: submitted
     }
   ], 
   scrollBehavior (to, from, savedPosition) {

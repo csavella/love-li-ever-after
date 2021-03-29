@@ -97,7 +97,7 @@ export default {
         addGuest: function () {
             if(this.firstname && this.lastname && this.checkEmailAddress()) {
                 this.sendEmail();
-                alert("Thank you! Your response has been recorded! XOXO, Kevin and Chas");
+                //alert("Thank you! Your response has been recorded! XOXO, Kevin and Chas");
                 console.log(`Adding guest ${this.firstname} ${this.lastname} ${this.email} ${this.confirmed} ${this.allergies}`);
                 let guest = {firstname: this.firstname, lastname: this.lastname, email: this.email, confirmed: this.confirmed, allergies: this.allergies}
                 this.guests.push(guest)
@@ -106,6 +106,7 @@ export default {
                 this.email = ''
                 this.confirmed = false
                 this.allergies = []
+                this.$router.push("/submitted");
             }
         },
         sendEmail: function() {
