@@ -5,7 +5,7 @@
         <h2>Ceremony and Reception</h2>
         SATURDAY, SEPTEMBER 18, 2021<br>
         4:30 - 10:00 PM HST<br>
-        <a href="https://olowaluplantationhouse.com/"><h3>Olowalu Plantation House</h3></a>
+        <a class="venuelink" href="https://olowaluplantationhouse.com/"><h3>Olowalu Plantation House</h3></a>
         810 Olowalu Village Road<br>
         Lahaina, Hawaii 96761<br>
         <button class="btn btn-info" @click="newTab()">View Map</button>
@@ -58,10 +58,10 @@ button {
     padding: 20px;
     opacity: 0.6;
 }
-a {
+.venuelink {
   color: white;
 }
-a:hover {
+.venuelink:hover {
   color: white;
   text-decoration: underline;
 }
