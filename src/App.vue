@@ -39,7 +39,7 @@ export default {
 
     fab: false,
     startTime: Date.now(),
-    endTime: "Sept 18, 2021 16:30:00",
+    endTime: "Sept 18, 2021 19:30:00",
     times: [
       { id: 0, text: "Days", time: 1 },
       { id: 1, text: "Hours", time: 1 },

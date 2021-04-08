@@ -28,9 +28,12 @@
 		</div>
 		<div class="accommodations" id="accommodations">
 			<h2>Accommodations</h2>
-			<p>We recommend that our guests find an Airbnb or hotel that's relatively close to our venue in Olowalu. 
-				Below are a few options in Lahaina and Ka'anapali. If you're on a budget, you can find cheaper places
-				to stay in Kihei, about 20-30 minute drive from Olowalu/Lahaina.</p>
+			<p>We contacted multiple hotels in the Lahaina/Ka'anapali area for room blocks, but unfortunately, they are 
+				not able to offer our guests any significant discounts. The quotes we received were around $300/room per 
+				night. With resort fees, tax, etc. that averages around $200 per person per night. Therefore, we recommend 
+				that our guests find a reasonably priced Airbnb or hotel that's relatively close to our venue in Olowalu. 
+				Below are a few options that we recommend in Lahaina and Ka'anapali. If you're on a budget, you can find 
+				cheaper places to stay in Kihei, about 20-30 minute drive from Olowalu/Lahaina.</p>
 			<h3>Lahaina</h3>
 			<dl class="accommodationlist">
 				<dt>Puamana resort</dt>
